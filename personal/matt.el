@@ -9,12 +9,22 @@
                             org-plus-contrib
                             xml-rpc
                             metaweblog
-                            htmlize))
+                            htmlize
+                            terraform-mode
+                            dockerfile-mode
+                            puppet-mode
+                            counsel-projectile
+                            company-terraform
+                            company-shell))
 
 ;; GUI
-(setq default-frame-alist '((font . "DejaVu Sans Mono-10")))
 (setq whitespace-style '(face trailing tabs empty))
 ;; (disable-theme 'zenburn)
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Who the hell are we?
+(setq user-full-name "Matt Ford"
+      user-mail-address "matt@dancingfrog.co.uk")
 
 ;; Markdown
 ;; (add-hook 'markdown-mode-hook 'visual-line-mode)
@@ -46,18 +56,30 @@
    (shell . t)
    (clojure . t)))
 
-(require 'ob-clojure)
 (setq org-babel-clojure-backend 'cider)
+(setq org-export-babel-evaluate nil)
 
 (setq load-path (cons "~/.emacs.d/org2blog/" load-path))
 (require 'org2blog-autoloads)
+
 (setq org2blog/wp-blog-alist
       '(("Witan"
          :url "https://witanblog.wordpress.com/xmlrpc.php"
-         :username "mattford63"
-         :default-title "Just Another Default Title"
-         :default-categories ("org2blog" "emacs")
-         :tags-as-categories nil)))
+         :username "mattford63")
+        ("Dancingfrog"
+         :url "https://dancingfrogsite.wordpress.com/xmlrpc.php"
+         :username "mattford63")))
+
+(setq org2blog/wp-shortcode-langs-map '(("elisp" . "text")))
+(setq org2blog/wp-use-sourcecode-shortcode t)
+
+(require 'org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+(setq org-crypt-key "68D8501429C42E01")
+
+;; EPA Encryption
+(setq epg-gpg-program "gpg2")
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
