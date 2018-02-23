@@ -45,6 +45,9 @@
 ;; Dired Tree
 (all-the-icons-dired-mode)
 
+;; Projectile
+(setq projectile-switch-project-action 'projectile-dired)
+
 ;; Magit
 (require 'magit-gh-pulls)
 (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
