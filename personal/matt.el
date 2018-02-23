@@ -15,7 +15,8 @@
                             puppet-mode
                             counsel-projectile
                             company-terraform
-                            company-shell))
+                            company-shell
+                            ag))
 
 ;; GUI
 (setq whitespace-style '(face trailing tabs empty))
@@ -39,6 +40,11 @@
       deft-recursive t
       deft-use-filename-as-title nil
       deft-use-filter-string-for-filename t)
+
+(setq deft-file-naming-rules
+      '((noslash . "-")
+        (nospace . "-")
+        (case-fn . downcase)))
 
 (global-set-key [f8] 'deft)
 
