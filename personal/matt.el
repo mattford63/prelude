@@ -19,7 +19,8 @@
                             ag))
 
 ;; GUI
-(setq whitespace-style '(face trailing tabs empty))
+(setq whitespace-style '(face tabs empty))
+
 ;; (disable-theme 'zenburn)
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
