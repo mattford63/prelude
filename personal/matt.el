@@ -53,7 +53,7 @@
 (all-the-icons-dired-mode)
 
 ;; Projectile
-(setq projectile-switch-project-action 'projectile-find-file)
+(setq projectile-switch-project-action 'projectile-find)
 
 ;; Magit
 (require 'magit-gh-pulls)
