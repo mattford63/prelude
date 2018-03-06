@@ -36,7 +36,7 @@
 (setq cljr-warn-on-eval nil)
 
 ;; Deft
-(setq deft-directory "~/src/github/mattford63/feynman"
+(setq deft-directory "~/src/keybase/feynman"
       deft-extensions '("org" "md")
       deft-recursive t
       deft-use-filename-as-title nil
