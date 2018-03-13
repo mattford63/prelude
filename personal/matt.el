@@ -16,7 +16,8 @@
                             counsel-projectile
                             company-terraform
                             company-shell
-                            ag))
+                            ag
+                            leuven-theme))
 
 ;; GUI
 (setq whitespace-style '(face tabs empty))
