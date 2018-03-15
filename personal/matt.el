@@ -23,6 +23,8 @@
 (setq whitespace-style '(face tabs empty))
 
 (disable-theme 'zenburn)
+(load-theme 'leuven)
+(setq default-frame-alist '((font . "Monospace-10")))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Who the hell are we?
@@ -38,7 +40,7 @@
 
 ;; Deft
 (setq deft-directory "~/src/keybase/feynman"
-      deft-extensions '("org" "md")
+      deft-extensions '("org" "md") 
       deft-recursive t
       deft-use-filename-as-title nil
       deft-use-filter-string-for-filename t)
