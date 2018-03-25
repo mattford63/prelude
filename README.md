@@ -1,7 +1,7 @@
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
 [![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
 
-Emacs Prelude
+Emacs Prelude (Matt's Branch)
 =============
 
 Prelude is an Emacs distribution that aims to enhance the default
