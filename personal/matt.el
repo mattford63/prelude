@@ -17,15 +17,20 @@
                             company-terraform
                             company-shell
                             ag
-                            leuven-theme))
+                            leuven-theme
+                            ob-async
+                            fold-dwim
+                            fold-dwim-org))
 
 ;; GUI
 (setq whitespace-style '(face tabs empty))
-
-(disable-theme 'zenburn)
-(load-theme 'leuven)
+;;(disable-theme 'zenburn)
+;;(load-theme 'leuven)
 (setq default-frame-alist '((font . "Monospace-10")))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Browser
+(setq browse-url-browser-function 'browse-url-chrome)
 
 ;; Who the hell are we?
 (setq user-full-name "Matt Ford"
@@ -36,7 +41,10 @@
 ;; (add-hook 'markdown-mode-hook 'visual-fill-column-mode)
 
 ;; Clojure
-(setq cljr-warn-on-eval nil)
+(setq cljr-warn-on-eval t)
+
+(add-hook 'clojure-mode-hook 'hs-minor-mode)
+(add-hook 'clojure-mode-hook 'fold-dwim-org/minor-mode)
 
 ;; Deft
 (setq deft-directory "~/src/keybase/feynman"
@@ -50,13 +58,11 @@
         (nospace . "-")
         (case-fn . downcase)))
 
-(global-set-key [f8] 'deft)
-
 ;; Dired Tree
 (all-the-icons-dired-mode)
 
 ;; Projectile
-(setq projectile-switch-project-action 'projectile-find)
+(setq projectile-switch-project-action 'projectile-find-file)
 
 ;; Magit
 (require 'magit-gh-pulls)
@@ -71,6 +77,7 @@
 
 (setq org-babel-clojure-backend 'cider)
 (setq org-export-babel-evaluate nil)
+(setq org-confirm-babel-evaluate nil)
 
 (setq load-path (cons "~/.emacs.d/org2blog/" load-path))
 (require 'org2blog-autoloads)
