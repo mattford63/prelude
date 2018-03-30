@@ -26,7 +26,12 @@
 (setq whitespace-style '(face tabs empty))
 ;;(disable-theme 'zenburn)
 ;;(load-theme 'leuven)
-(setq default-frame-alist '((font . "Monospace-10")))
+
+(let ((font-size (if (string-equal system-type "darwin")
+                     "14"
+                   "10")))
+  (setq default-frame-alist (list (cons 'font (concat "Monospace-" font-size)))))
+
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Browser
