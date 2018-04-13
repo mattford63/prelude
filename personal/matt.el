@@ -20,12 +20,23 @@
                             leuven-theme
                             ob-async
                             fold-dwim
-                            fold-dwim-org))
+                            fold-dwim-org
+                            org2blog
+                            deft
+                            all-the-icons
+                            all-the-icons-dired
+                            all-the-icons-ivy
+                            doom-themes))
 
 ;; GUI
 (setq whitespace-style '(face tabs empty))
-;;(disable-theme 'zenburn)
-;;(load-theme 'leuven)
+(disable-theme 'zenburn)
+(load-theme 'doom-nord)
+(doom-themes-org-config)
+(doom-themes-neotree-config)
+(all-the-icons-ivy-setup)
+(load-theme 'smart-mode-line-respectful)
+(smart-mode-line-enable)
 
 (let ((font-size (if (string-equal system-type "darwin")
                      "14"
