@@ -35,7 +35,7 @@
 (doom-themes-org-config)
 (doom-themes-neotree-config)
 (all-the-icons-ivy-setup)
-(load-theme 'smart-mode-line-respectful)
+(load-theme 'smart-mode-line-light)
 (smart-mode-line-enable)
 
 (let ((font-size (if (string-equal system-type "darwin")
