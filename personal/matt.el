@@ -33,7 +33,9 @@
                             unicode-fonts
                             browse-at-remote
                             calfw
-                            calfw-org))
+                            calfw-org
+                            smart-mode-line
+                            neotree))
 
 ;; GUI
 (setq whitespace-style '(face tabs empty))
@@ -42,6 +44,8 @@
 ;;(doom-themes-org-config)
 ;;(doom-themes-neotree-config)
 (all-the-icons-ivy-setup)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(setq neo-theme 'icons)
 (load-theme 'smart-mode-line-light)
 (smart-mode-line-enable)
 
@@ -51,6 +55,12 @@
   (setq default-frame-alist (list (cons 'font (concat "Monospace-" font-size)))))
 
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+(global-set-key [f9] 'neotree-toggle)
+(global-set-key [f8] 'mu4e)
+(global-set-key [f7] 'cfw:open-org-calendar)
+(global-set-key [f6] 'deft)
+(global-set-key [f5] 'eshell)
 
 ;; Browser
 (setq browse-url-browser-function 'browse-url-chrome)
@@ -151,7 +161,7 @@
 
 (setq mu4e-headers-fields '((:human-date . 12)
                             (:flags . 6)
-                            (:mailing-list . 10)
+                            (:mailing-list . 15)
                             (:tags . 15)
                             (:from . 22)
                             (:subject)))
@@ -193,7 +203,10 @@
       ;;mu4e-html2text-command "html2text -utf8 -width 72"
       )
 
-;;(unicode-fonts-setup) ; run once only?
+(add-to-list 'mu4e-view-actions 
+             '("ViewBrowser" . mu4e-action-view-in-browser) t)
+
+(unicode-fonts-setup) ; run once only?
 
 ;; Borrowed from http://ionrock.org/emacs-email-and-mu.html
 ;; Choose account label to feed msmtp -a option based on From header
@@ -222,6 +235,8 @@
 ;;              '("maildir:/Gitorious/inbox OR maildir:/Shortcut/inbox OR maildir:/Gmail/inbox flag:unread" "Today's news" ?z))
 ;; (add-to-list 'mu4e-bookmarks
 ;;              '("maildir:/Gmail/gitorious-ml flag:unread" "Unread on the mailing list" ?m))
+
+(setq mu4e-update-interval 600)
 
 ;; Pivotal
 (setq pivotal-credentials (auth-source-user-and-password "pivotal"))
