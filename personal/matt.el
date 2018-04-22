@@ -153,41 +153,90 @@
 (require 'mu4e)
 (setq mu4e-maildir "~/mail")
 (setq mu4e-get-mail-command "offlineimap")
-(setq mu4e-drafts-folder "/mail/drafts")
-(setq mu4e-user-mail-address-list (list "matt@mastodonc.com"
-                                        "matt.ford@mastodonc.com"
-                                        "matt@dancingfrog.co.uk"
-                                        "mattford63@gmail.com"))
 (setq message-kill-buffer-on-exit t)
 (setq mu4e-use-fancy-chars nil)
-(setq mu4e-maildir-shortcuts
-      '(("/mastodonc/INBOX" . ?m)
-        ("/dancingfrog/INBOX" . ?d)))
+(setq mu4e-mastodonc-bookmarks `(("\\\\Inbox AND maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc Inbox" ?i)
+                                 ("flag:flagged AND maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc Flagged messages" ?f)
+                                 (,(concat "flag:unread AND "
+                                           "maildir:\"/mastodonc/[Gmail].All Mail\" AND "
+                                           "NOT flag:trashed AND " 
+                                           "NOT maildir:/mastodonc/[Gmail].Spam AND " 
+                                           "NOT maildir:/mastodonc/[Gmail].Trash")
+                                  "Mastodonc Unread messages" ?u)
+                                 ("maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc All Mail" ?a)))
 
-(setq mu4e-headers-fields '((:human-date . 12)
+(setq mu4e-dancingfrog-bookmarks `(("\\\\Inbox AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Inbox" ?i) 
+                                   ("flag:flagged AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Flagged messages" ?f) 
+                                   (,(concat "flag:unread AND "
+                                             "maildir:\"/dancingfrog/[Google Mail].All Mail\" AND "
+                                             "NOT flag:trashed AND " 
+                                             "NOT maildir:/dancingfrog/[Google Mail].Spam AND " 
+                                             "NOT maildir:/dancingfrog/[Google Mail].Bin") 
+                                    "Dancingfrog Unread messages" ?u)
+                                   ("maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog All Mail" ?a)))
+
+(setq mu4e-maildir "~/mail")
+(setq smtpmail-smtp-default-server "smtp.gmail.com")
+(setq smtpmail-smtp-server "smtp.gmail.com")
+(setq smtpmail-smtp-service 587)
+
+(setq mu4e-contexts
+      `( ,(make-mu4e-context
+           :name "Mastodonc"
+           :enter-func (lambda () (mu4e-message "Entering Mastodonc context"))
+           :leave-func (lambda () (mu4e-message "Leaving Mastodonc context"))
+           ;; we match based on the contact-fields of the message
+           :match-func (lambda (msg)
+                         (when msg 
+                           (string-match-p "^/mastodonc" (mu4e-message-field msg :maildir))))
+           :vars `((user-mail-address      . "matt@mastodonc.com"  )
+                   (mu4e-user-mail-address-list . ("matt@mastodonc.com" "matt.ford@mastodonc.com"))
+                   (user-full-name         . "Matt Ford" )
+                   (mu4e-compose-signature . "Matt\n")
+                   (mu4e-sent-folder . "/mastodonc/[Gmail].All Mail") 
+                   (mu4e-drafts-folder . "/mastodonc/[Gmail].Drafts") 
+                   (mu4e-trash-folder . "/mastodonc/[Gmail].Trash") 
+                   (mu4e-refile-folder . "/mastodonc/[Gmail].All Mail")
+                   (mu4e-bookmarks . ,mu4e-mastodonc-bookmarks)
+                   (smtpmail-smtp-user . "matt.ford@mastodonc.com")
+                   (smtpmail-smtp-service . 587)))
+         ,(make-mu4e-context
+           :name "Dancingfrog"
+           :enter-func (lambda () (mu4e-message "Switch to the Dancingfrog context"))
+           ;; no leave-func
+           ;; we match based on the maildir of the message
+           ;; this matches maildir /Arkham and its sub-directories
+           :match-func (lambda (msg)
+                         (when msg
+                           (string-match-p "^/dancingfrog" (mu4e-message-field msg :maildir))))
+           :vars `((user-mail-address       . "matt@dancingfrog.co.uk" )
+                   (user-full-name          . "Matt Ford" )
+                   (mu4e-compose-signature . "Matt\n")
+                   (mu4e-user-mail-address-list  . ("matt@dancingfrog.co.uk" "mattford63@gmail.com"))
+                   (mu4e-sent-folder . "/dancingfrog/[Google Mail].All Mail") 
+                   (mu4e-drafts-folder . "/dancingfrog/[Google Mail].Drafts") 
+                   (mu4e-trash-folder . "/dancingfrog/[Google Mail].Bin") 
+                   (mu4e-refile-folder . "/dancingfrog/[Google Mail].All Mail")
+                   (mu4e-bookmarks . ,mu4e-dancingfrog-bookmarks)
+                   (smtpmail-smtp-user . "mattford63@gmail.com")
+                   (smtpmail-smtp-service . 587)))))
+
+(setq mu4e-context-policy 'pick-first)
+(setq mu4e-compose-context-policy nil)
+
+(add-hook 'mu4e-mark-execute-pre-hook 
+          (lambda (mark msg) 
+            (cond ((equal mark 'refile) (mu4e-action-retag-message msg "-\\Inbox")) 
+                  ((equal mark 'trash) (mu4e-action-retag-message msg "-\\Inbox,-\\Starred")) 
+                  ((equal mark 'flag) (mu4e-action-retag-message msg "-\\Inbox,\\Starred")) 
+                  ((equal mark 'unflag) (mu4e-action-retag-message msg "-\\Starred")))))
+
+(setq mu4e-headers-fields '((:human-date . 9)
                             (:flags . 6)
-                            (:mailing-list . 15)
-                            (:tags . 15)
+                            (:mailing-list . 12)
+                            (:tags . 20)
                             (:from . 22)
                             (:subject)))
-
-;; Smart refile locations
-;; (setq mu4e-refile-folder
-;;       (lambda (msg)
-;;         (cond
-;;          ;; messages sent directly to me go to /archive
-;;          ;; also `mu4e-user-mail-address-regexp' can be used
-;;          ((mu4e-message-contact-field-matches msg :to "marius@gitorious")
-;;           "/Gitorious/archive")
-;;          ((mu4e-message-contact-field-matches msg :to "marius.mathiesen@gmail.com")
-;;           "/Gmail/archive")
-;;          ((mu4e-message-contact-field-matches msg :to "zmalltalker@zmalltalker.com")
-;;           "/Gmail/archive")
-;;          ((mu4e-message-contact-field-matches msg :to "marius@shortcut.no")
-;;           "/Shortcut/archive")
-;;          ;; everything else goes to /archive
-;;          ;; important to have a catch-all at the end!
-;;          (t  "/Gmail/archive"))))
 
 ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
 (setq mu4e-sent-messages-behavior 'delete)
@@ -197,55 +246,55 @@
  mu4e-view-show-images t
  mu4e-view-image-max-width 800)
 
-;; sending mail
-;;(setq message-send-mail-function 'message-send-mail-with-sendmail
-;;      sendmail-program "/usr/bin/msmtp"
-;;      user-full-name "Matt Ford")
-
-
 (setq mu4e-confirm-quit nil
-      mu4e-headers-date-format "%d/%b/%Y %H:%M" ; date format
-      ;;mu4e-html2text-command "html2text -utf8 -width 72"
-      )
+      mu4e-headers-date-format "%d/%b/%Y %H:%M")
 
 (add-to-list 'mu4e-view-actions 
              '("ViewBrowser" . mu4e-action-view-in-browser) t)
 
-(unicode-fonts-setup) ; run once only?
-
-;; Borrowed from http://ionrock.org/emacs-email-and-mu.html
-;; Choose account label to feed msmtp -a option based on From header
-;; in Message buffer; This function must be added to
-;; message-send-mail-hook for on-the-fly change of From address before
-;; sending message since message-send-mail-hook is processed right
-;; before sending message.
-;; (defun choose-msmtp-account ()
-;;   (if (message-mail-p)
-;;       (save-excursion
-;;         (let*
-;;             ((from (save-restriction
-;;                      (message-narrow-to-headers)
-;;                      (message-fetch-field "from")))
-;;              (account
-;;               (cond
-;;                ((string-match "marius.mathiesen@gmail.com" from) "gmail")
-;;                ((string-match "zmalltalker@zmalltalker.com" from) "gmail")
-;;                ((string-match "marius@shortcut.no" from) "shortcut")
-;;                ((string-match "marius@gitorious.com" from) "gitorious")
-;;                ((string-match "marius@gitorious.org" from) "gitorious"))))
-;;           (setq message-sendmail-extra-arguments (list '"-a" account))))))
-;; (setq message-sendmail-envelope-from 'header)
-;; (add-hook 'message-send-mail-hook 'choose-msmtp-account)
-;; (add-to-list 'mu4e-bookmarks
-;;              '("maildir:/Gitorious/inbox OR maildir:/Shortcut/inbox OR maildir:/Gmail/inbox flag:unread" "Today's news" ?z))
-;; (add-to-list 'mu4e-bookmarks
-;;              '("maildir:/Gmail/gitorious-ml flag:unread" "Unread on the mailing list" ?m))
+;;(unicode-fonts-setup) ; run once only?
 
 (setq mu4e-update-interval 600)
+
+;; Dired mail attachments
+(require 'gnus-dired)
+;; make the `gnus-dired-mail-buffers' function also work on
+;; message-mode derived modes, such as mu4e-compose-mode
+(defun gnus-dired-mail-buffers ()
+  "Return a list of active message buffers."
+  (let (buffers)
+    (save-current-buffer
+      (dolist (buffer (buffer-list t))
+        (set-buffer buffer)
+        (when (and (derived-mode-p 'message-mode)
+                (null message-sent-message-via))
+          (push (buffer-name buffer) buffers))))
+    (nreverse buffers)))
+
+(setq gnus-dired-mail-mode 'mu4e-user-agent)
+(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
 ;; Pivotal
 (setq pivotal-credentials (auth-source-user-and-password "pivotal"))
 (setq pivotal-api-token (cadr pivotal-credentials))
+
+;;Twitter
+(setq twittering-connection-type-order '(wget curl urllib-http native urllib-https))
+(setq twittering-use-master-password t)
+(setq twittering-icon-mode t)
+(setq twittering-convert-fix-size 64)
+(setq twittering-use-icon-storage t)
+
+;; ;; eshell
+(setq terraboot-witan-repo "~/src/github/mastodonc/terraboot-witan/terraform/")
+
+(defun eshell/witan (env cmd &rest args)
+  "Wrapper around mach - supply the env, the command and optionally the MFA."
+  (let ((default-directory (concat terraboot-witan-repo env))
+        (mfa (pop args)))
+    (if mfa
+        (shell-command (concat "MFA=" (number-to-string mfa) " mach " cmd ))
+      (shell-command (concat "mach " cmd)))))
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
