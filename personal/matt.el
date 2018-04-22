@@ -35,7 +35,8 @@
                             calfw
                             calfw-org
                             smart-mode-line
-                            neotree))
+                            neotree
+                            twittering-mode))
 
 ;; GUI
 (setq whitespace-style '(face tabs empty))
@@ -43,6 +44,7 @@
 ;;(load-theme 'doom-nord)
 ;;(doom-themes-org-config)
 ;;(doom-themes-neotree-config)
+;;(all-the-icons-install-fonts) ; run-once
 (all-the-icons-ivy-setup)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (setq neo-theme 'icons)
@@ -61,6 +63,8 @@
 (global-set-key [f7] 'cfw:open-org-calendar)
 (global-set-key [f6] 'deft)
 (global-set-key [f5] 'eshell)
+
+(nyan-mode)
 
 ;; Browser
 (setq browse-url-browser-function 'browse-url-chrome)
@@ -140,6 +144,7 @@
 
 (require 'calfw)
 (require 'calfw-org)
+(require 'org-drill)
 
 ;; EPA Encryption
 (setq epg-gpg-program "gpg2")
