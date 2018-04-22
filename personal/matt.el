@@ -285,7 +285,7 @@
 (setq twittering-convert-fix-size 64)
 (setq twittering-use-icon-storage t)
 
-;; ;; eshell
+;; eshell
 (setq terraboot-witan-repo "~/src/github/mastodonc/terraboot-witan/terraform/")
 
 (defun eshell/witan (env cmd &rest args)
