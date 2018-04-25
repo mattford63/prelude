@@ -29,11 +29,11 @@
                             doom-themes
                             leuven-theme
                             pivotal-tracker
-                            org-gcal
+                            ;;org-gcal
                             unicode-fonts
                             browse-at-remote
-                            calfw
-                            calfw-org
+                            ;;calfw
+                            ;;calfw-org
                             smart-mode-line
                             neotree
                             twittering-mode))
@@ -136,143 +136,143 @@
 (setq org-crypt-key "68D8501429C42E01")
 
 
-(require 'org-gcal)
-(setq org-gcal-credentials (auth-source-user-and-password "org-gcal"))
-(setq org-gcal-client-id (car org-gcal-credentials)
-      org-gcal-client-secret (cadr org-gcal-credentials)
-      org-gcal-file-alist '(("matt.ford@mastodonc.com" .  "~/schedule.org")))
+;; (require 'org-gcal)
+;; (setq org-gcal-credentials (auth-source-user-and-password "org-gcal"))
+;; (setq org-gcal-client-id (car org-gcal-credentials)
+;;       org-gcal-client-secret (cadr org-gcal-credentials)
+;;       org-gcal-file-alist '(("matt.ford@mastodonc.com" .  "~/schedule.org")))
 
-(require 'calfw)
-(require 'calfw-org)
-(require 'org-drill)
+;; (require 'calfw)
+;; (require 'calfw-org)
+;; (require 'org-drill)
 
 ;; EPA Encryption
 (setq epg-gpg-program "gpg2")
 
 ;; Email
-(require 'mu4e)
-(setq mu4e-maildir "~/mail")
-(setq mu4e-get-mail-command "offlineimap")
-(setq message-kill-buffer-on-exit t)
-(setq mu4e-use-fancy-chars nil)
-(setq mu4e-mastodonc-bookmarks `(("\\\\Inbox AND maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc Inbox" ?i)
-                                 ("flag:flagged AND maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc Flagged messages" ?f)
-                                 (,(concat "flag:unread AND "
-                                           "maildir:\"/mastodonc/[Gmail].All Mail\" AND "
-                                           "NOT flag:trashed AND " 
-                                           "NOT maildir:/mastodonc/[Gmail].Spam AND " 
-                                           "NOT maildir:/mastodonc/[Gmail].Trash")
-                                  "Mastodonc Unread messages" ?u)
-                                 ("maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc All Mail" ?a)))
+;; (require 'mu4e)
+;; (setq mu4e-maildir "~/mail")
+;; (setq mu4e-get-mail-command "offlineimap")
+;; (setq message-kill-buffer-on-exit t)
+;; (setq mu4e-use-fancy-chars nil)
+;; (setq mu4e-mastodonc-bookmarks `(("\\\\Inbox AND maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc Inbox" ?i)
+;;                                  ("flag:flagged AND maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc Flagged messages" ?f)
+;;                                  (,(concat "flag:unread AND "
+;;                                            "maildir:\"/mastodonc/[Gmail].All Mail\" AND "
+;;                                            "NOT flag:trashed AND " 
+;;                                            "NOT maildir:/mastodonc/[Gmail].Spam AND " 
+;;                                            "NOT maildir:/mastodonc/[Gmail].Trash")
+;;                                   "Mastodonc Unread messages" ?u)
+;;                                  ("maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc All Mail" ?a)))
 
-(setq mu4e-dancingfrog-bookmarks `(("\\\\Inbox AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Inbox" ?i) 
-                                   ("flag:flagged AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Flagged messages" ?f) 
-                                   (,(concat "flag:unread AND "
-                                             "maildir:\"/dancingfrog/[Google Mail].All Mail\" AND "
-                                             "NOT flag:trashed AND " 
-                                             "NOT maildir:/dancingfrog/[Google Mail].Spam AND " 
-                                             "NOT maildir:/dancingfrog/[Google Mail].Bin") 
-                                    "Dancingfrog Unread messages" ?u)
-                                   ("maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog All Mail" ?a)))
+;; (setq mu4e-dancingfrog-bookmarks `(("\\\\Inbox AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Inbox" ?i) 
+;;                                    ("flag:flagged AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Flagged messages" ?f) 
+;;                                    (,(concat "flag:unread AND "
+;;                                              "maildir:\"/dancingfrog/[Google Mail].All Mail\" AND "
+;;                                              "NOT flag:trashed AND " 
+;;                                              "NOT maildir:/dancingfrog/[Google Mail].Spam AND " 
+;;                                              "NOT maildir:/dancingfrog/[Google Mail].Bin") 
+;;                                     "Dancingfrog Unread messages" ?u)
+;;                                    ("maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog All Mail" ?a)))
 
-(setq mu4e-maildir "~/mail")
-(setq smtpmail-smtp-default-server "smtp.gmail.com")
-(setq smtpmail-smtp-server "smtp.gmail.com")
-(setq smtpmail-smtp-service 587)
+;; (setq mu4e-maildir "~/mail")
+;; (setq smtpmail-smtp-default-server "smtp.gmail.com")
+;; (setq smtpmail-smtp-server "smtp.gmail.com")
+;; (setq smtpmail-smtp-service 587)
 
-(setq mu4e-contexts
-      `( ,(make-mu4e-context
-           :name "Mastodonc"
-           :enter-func (lambda () (mu4e-message "Entering Mastodonc context"))
-           :leave-func (lambda () (mu4e-message "Leaving Mastodonc context"))
-           ;; we match based on the contact-fields of the message
-           :match-func (lambda (msg)
-                         (when msg 
-                           (string-match-p "^/mastodonc" (mu4e-message-field msg :maildir))))
-           :vars `((user-mail-address      . "matt@mastodonc.com"  )
-                   (mu4e-user-mail-address-list . ("matt@mastodonc.com" "matt.ford@mastodonc.com"))
-                   (user-full-name         . "Matt Ford" )
-                   (mu4e-compose-signature . "Matt\n")
-                   (mu4e-sent-folder . "/mastodonc/[Gmail].All Mail") 
-                   (mu4e-drafts-folder . "/mastodonc/[Gmail].Drafts") 
-                   (mu4e-trash-folder . "/mastodonc/[Gmail].Trash") 
-                   (mu4e-refile-folder . "/mastodonc/[Gmail].All Mail")
-                   (mu4e-bookmarks . ,mu4e-mastodonc-bookmarks)
-                   (smtpmail-smtp-user . "matt.ford@mastodonc.com")
-                   (smtpmail-smtp-service . 587)))
-         ,(make-mu4e-context
-           :name "Dancingfrog"
-           :enter-func (lambda () (mu4e-message "Switch to the Dancingfrog context"))
-           ;; no leave-func
-           ;; we match based on the maildir of the message
-           ;; this matches maildir /Arkham and its sub-directories
-           :match-func (lambda (msg)
-                         (when msg
-                           (string-match-p "^/dancingfrog" (mu4e-message-field msg :maildir))))
-           :vars `((user-mail-address       . "matt@dancingfrog.co.uk" )
-                   (user-full-name          . "Matt Ford" )
-                   (mu4e-compose-signature . "Matt\n")
-                   (mu4e-user-mail-address-list  . ("matt@dancingfrog.co.uk" "mattford63@gmail.com"))
-                   (mu4e-sent-folder . "/dancingfrog/[Google Mail].All Mail") 
-                   (mu4e-drafts-folder . "/dancingfrog/[Google Mail].Drafts") 
-                   (mu4e-trash-folder . "/dancingfrog/[Google Mail].Bin") 
-                   (mu4e-refile-folder . "/dancingfrog/[Google Mail].All Mail")
-                   (mu4e-bookmarks . ,mu4e-dancingfrog-bookmarks)
-                   (smtpmail-smtp-user . "mattford63@gmail.com")
-                   (smtpmail-smtp-service . 587)))))
+;; (setq mu4e-contexts
+;;       `( ,(make-mu4e-context
+;;            :name "Mastodonc"
+;;            :enter-func (lambda () (mu4e-message "Entering Mastodonc context"))
+;;            :leave-func (lambda () (mu4e-message "Leaving Mastodonc context"))
+;;            ;; we match based on the contact-fields of the message
+;;            :match-func (lambda (msg)
+;;                          (when msg 
+;;                            (string-match-p "^/mastodonc" (mu4e-message-field msg :maildir))))
+;;            :vars `((user-mail-address      . "matt@mastodonc.com"  )
+;;                    (mu4e-user-mail-address-list . ("matt@mastodonc.com" "matt.ford@mastodonc.com"))
+;;                    (user-full-name         . "Matt Ford" )
+;;                    (mu4e-compose-signature . "Matt\n")
+;;                    (mu4e-sent-folder . "/mastodonc/[Gmail].All Mail") 
+;;                    (mu4e-drafts-folder . "/mastodonc/[Gmail].Drafts") 
+;;                    (mu4e-trash-folder . "/mastodonc/[Gmail].Trash") 
+;;                    (mu4e-refile-folder . "/mastodonc/[Gmail].All Mail")
+;;                    (mu4e-bookmarks . ,mu4e-mastodonc-bookmarks)
+;;                    (smtpmail-smtp-user . "matt.ford@mastodonc.com")
+;;                    (smtpmail-smtp-service . 587)))
+;;          ,(make-mu4e-context
+;;            :name "Dancingfrog"
+;;            :enter-func (lambda () (mu4e-message "Switch to the Dancingfrog context"))
+;;            ;; no leave-func
+;;            ;; we match based on the maildir of the message
+;;            ;; this matches maildir /Arkham and its sub-directories
+;;            :match-func (lambda (msg)
+;;                          (when msg
+;;                            (string-match-p "^/dancingfrog" (mu4e-message-field msg :maildir))))
+;;            :vars `((user-mail-address       . "matt@dancingfrog.co.uk" )
+;;                    (user-full-name          . "Matt Ford" )
+;;                    (mu4e-compose-signature . "Matt\n")
+;;                    (mu4e-user-mail-address-list  . ("matt@dancingfrog.co.uk" "mattford63@gmail.com"))
+;;                    (mu4e-sent-folder . "/dancingfrog/[Google Mail].All Mail") 
+;;                    (mu4e-drafts-folder . "/dancingfrog/[Google Mail].Drafts") 
+;;                    (mu4e-trash-folder . "/dancingfrog/[Google Mail].Bin") 
+;;                    (mu4e-refile-folder . "/dancingfrog/[Google Mail].All Mail")
+;;                    (mu4e-bookmarks . ,mu4e-dancingfrog-bookmarks)
+;;                    (smtpmail-smtp-user . "mattford63@gmail.com")
+;;                    (smtpmail-smtp-service . 587)))))
 
-(setq mu4e-context-policy 'pick-first)
-(setq mu4e-compose-context-policy nil)
+;; (setq mu4e-context-policy 'pick-first)
+;; (setq mu4e-compose-context-policy nil)
 
-(add-hook 'mu4e-mark-execute-pre-hook 
-          (lambda (mark msg) 
-            (cond ((equal mark 'refile) (mu4e-action-retag-message msg "-\\Inbox")) 
-                  ((equal mark 'trash) (mu4e-action-retag-message msg "-\\Inbox,-\\Starred")) 
-                  ((equal mark 'flag) (mu4e-action-retag-message msg "-\\Inbox,\\Starred")) 
-                  ((equal mark 'unflag) (mu4e-action-retag-message msg "-\\Starred")))))
+;; (add-hook 'mu4e-mark-execute-pre-hook 
+;;           (lambda (mark msg) 
+;;             (cond ((equal mark 'refile) (mu4e-action-retag-message msg "-\\Inbox")) 
+;;                   ((equal mark 'trash) (mu4e-action-retag-message msg "-\\Inbox,-\\Starred")) 
+;;                   ((equal mark 'flag) (mu4e-action-retag-message msg "-\\Inbox,\\Starred")) 
+;;                   ((equal mark 'unflag) (mu4e-action-retag-message msg "-\\Starred")))))
 
-(setq mu4e-headers-fields '((:human-date . 9)
-                            (:flags . 6)
-                            (:mailing-list . 12)
-                            (:tags . 20)
-                            (:from . 22)
-                            (:subject)))
+;; (setq mu4e-headers-fields '((:human-date . 9)
+;;                             (:flags . 6)
+;;                             (:mailing-list . 12)
+;;                             (:tags . 20)
+;;                             (:from . 22)
+;;                             (:subject)))
 
-;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-(setq mu4e-sent-messages-behavior 'delete)
+;; ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+;; (setq mu4e-sent-messages-behavior 'delete)
 
-;; Try to display images in mu4e
-(setq
- mu4e-view-show-images t
- mu4e-view-image-max-width 800)
+;; ;; Try to display images in mu4e
+;; (setq
+;;  mu4e-view-show-images t
+;;  mu4e-view-image-max-width 800)
 
-(setq mu4e-confirm-quit nil
-      mu4e-headers-date-format "%d/%b/%Y %H:%M")
+;; (setq mu4e-confirm-quit nil
+;;       mu4e-headers-date-format "%d/%b/%Y %H:%M")
 
-(add-to-list 'mu4e-view-actions 
-             '("ViewBrowser" . mu4e-action-view-in-browser) t)
+;; (add-to-list 'mu4e-view-actions 
+;;              '("ViewBrowser" . mu4e-action-view-in-browser) t)
 
-;;(unicode-fonts-setup) ; run once only?
+;; ;;(unicode-fonts-setup) ; run once only?
 
-(setq mu4e-update-interval 600)
+;; (setq mu4e-update-interval 600)
 
-;; Dired mail attachments
-(require 'gnus-dired)
-;; make the `gnus-dired-mail-buffers' function also work on
-;; message-mode derived modes, such as mu4e-compose-mode
-(defun gnus-dired-mail-buffers ()
-  "Return a list of active message buffers."
-  (let (buffers)
-    (save-current-buffer
-      (dolist (buffer (buffer-list t))
-        (set-buffer buffer)
-        (when (and (derived-mode-p 'message-mode)
-                (null message-sent-message-via))
-          (push (buffer-name buffer) buffers))))
-    (nreverse buffers)))
+;; ;; Dired mail attachments
+;; (require 'gnus-dired)
+;; ;; make the `gnus-dired-mail-buffers' function also work on
+;; ;; message-mode derived modes, such as mu4e-compose-mode
+;; (defun gnus-dired-mail-buffers ()
+;;   "Return a list of active message buffers."
+;;   (let (buffers)
+;;     (save-current-buffer
+;;       (dolist (buffer (buffer-list t))
+;;         (set-buffer buffer)
+;;         (when (and (derived-mode-p 'message-mode)
+;;                 (null message-sent-message-via))
+;;           (push (buffer-name buffer) buffers))))
+;;     (nreverse buffers)))
 
-(setq gnus-dired-mail-mode 'mu4e-user-agent)
-(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
+;; (setq gnus-dired-mail-mode 'mu4e-user-agent)
+;; (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
 ;; Pivotal
 (setq pivotal-credentials (auth-source-user-and-password "pivotal"))
