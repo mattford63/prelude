@@ -18,36 +18,38 @@
                             company-shell
                             ag
                             leuven-theme
-                            ob-async
+                            ;;ob-async
                             fold-dwim
                             fold-dwim-org
                             org2blog
                             deft
-                            all-the-icons
-                            all-the-icons-dired
-                            all-the-icons-ivy
+                            ;;all-the-icons
+                            ;;all-the-icons-dired
+                            ;;all-the-icons-ivy
                             doom-themes
                             leuven-theme
                             pivotal-tracker
                             ;;org-gcal
-                            unicode-fonts
+                            ;;unicode-fonts
                             browse-at-remote
                             ;;calfw
                             ;;calfw-org
                             smart-mode-line
                             neotree
-                            twittering-mode))
+                            ;;twittering-mode
+                            ))
 
 ;; GUI
+(server-start)
 (setq whitespace-style '(face tabs empty))
-(disable-theme 'zenburn)
+;;(disable-theme 'zenburn)
 ;;(load-theme 'doom-nord)
 ;;(doom-themes-org-config)
 ;;(doom-themes-neotree-config)
 ;;(all-the-icons-install-fonts) ; run-once
-(all-the-icons-ivy-setup)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-(setq neo-theme 'icons)
+;;(all-the-icons-ivy-setup)
+;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;;(setq neo-theme 'icons)
 (load-theme 'smart-mode-line-light)
 (smart-mode-line-enable)
 
@@ -59,12 +61,14 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (global-set-key [f9] 'neotree-toggle)
-(global-set-key [f8] 'mu4e)
-(global-set-key [f7] 'cfw:open-org-calendar)
+(global-set-key [f8] 'compose-mail)
+(global-set-key [f7] 'org-agenda)
 (global-set-key [f6] 'deft)
 (global-set-key [f5] 'eshell)
 
-(nyan-mode)
+(setq epa-pinentry-mode 'loopback)
+(pinentry-start)
+;;(nyan-mode)
 
 ;; Browser
 (setq browse-url-browser-function 'browse-url-chrome)
@@ -85,7 +89,7 @@
 
 ;; Deft
 (setq deft-directory "~/src/keybase/feynman"
-      deft-extensions '("org" "md") 
+      deft-extensions '("org" "md")
       deft-recursive t
       deft-use-filename-as-title nil
       deft-use-filter-string-for-filename t)
@@ -96,7 +100,7 @@
         (case-fn . downcase)))
 
 ;; Dired Tree
-(all-the-icons-dired-mode)
+;;(all-the-icons-dired-mode)
 
 ;; Projectile
 (setq projectile-switch-project-action 'projectile-find-file)
@@ -159,26 +163,28 @@
 ;;                                  ("flag:flagged AND maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc Flagged messages" ?f)
 ;;                                  (,(concat "flag:unread AND "
 ;;                                            "maildir:\"/mastodonc/[Gmail].All Mail\" AND "
-;;                                            "NOT flag:trashed AND " 
-;;                                            "NOT maildir:/mastodonc/[Gmail].Spam AND " 
+;;                                            "NOT flag:trashed AND "
+;;                                            "NOT maildir:/mastodonc/[Gmail].Spam AND "
 ;;                                            "NOT maildir:/mastodonc/[Gmail].Trash")
 ;;                                   "Mastodonc Unread messages" ?u)
 ;;                                  ("maildir:\"/mastodonc/[Gmail].All Mail\"" "Mastodonc All Mail" ?a)))
 
-;; (setq mu4e-dancingfrog-bookmarks `(("\\\\Inbox AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Inbox" ?i) 
-;;                                    ("flag:flagged AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Flagged messages" ?f) 
+;; (setq mu4e-dancingfrog-bookmarks `(("\\\\Inbox AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Inbox" ?i)
+;;                                    ("flag:flagged AND maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog Flagged messages" ?f)
 ;;                                    (,(concat "flag:unread AND "
 ;;                                              "maildir:\"/dancingfrog/[Google Mail].All Mail\" AND "
-;;                                              "NOT flag:trashed AND " 
-;;                                              "NOT maildir:/dancingfrog/[Google Mail].Spam AND " 
-;;                                              "NOT maildir:/dancingfrog/[Google Mail].Bin") 
+;;                                              "NOT flag:trashed AND "
+;;                                              "NOT maildir:/dancingfrog/[Google Mail].Spam AND "
+;;            https://gist.githubusercontent.com/mattford63/5a5a36aeb75e1dbde32e36d79f885a87/raw/4736f7b63e1e51cf39d631d9109d89e98abcd1f6/proxy.pachttps://gist.githubusercontent.com/mattford63/5a5a36aeb75e1dbde32e36d79f885a87/raw/4736f7b63e1e51cf39d631d9109d89e98abcd1f6/proxy.pachttps://gist.githubusercontent.com/mattford63/5a5a36aeb75e1dbde32e36d79f885a87/raw/4736f7b63e1e51cf39d631d9109d89e98abcd1f6/proxy.pachttps://gist.githubusercontent.com/mattford63/5a5a36aeb75e1dbde32e36d79f885a87/raw/4736f7b63e1e51cf39d631d9109d89e98abcd1f6/pr                                  "NOT maildir:/dancingfrog/[Google Mail].Bin")
 ;;                                     "Dancingfrog Unread messages" ?u)
 ;;                                    ("maildir:\"/dancingfrog/[Google Mail].All Mail\"" "Dancingfrog All Mail" ?a)))
 
 ;; (setq mu4e-maildir "~/mail")
-;; (setq smtpmail-smtp-default-server "smtp.gmail.com")
-;; (setq smtpmail-smtp-server "smtp.gmail.com")
-;; (setq smtpmail-smtp-service 587)
+(setq smtpmail-smtp-default-server "smtp.gmail.com")
+(setq smtpmail-smtp-server "smtp.gmail.com")
+(setq smtpmail-smtp-service 587)
+(setq smtpmail-smtp-user "mattford63@gmail.com")
+(setq smtpmail-smtp-service 587)
 
 ;; (setq mu4e-contexts
 ;;       `( ,(make-mu4e-context
@@ -187,15 +193,15 @@
 ;;            :leave-func (lambda () (mu4e-message "Leaving Mastodonc context"))
 ;;            ;; we match based on the contact-fields of the message
 ;;            :match-func (lambda (msg)
-;;                          (when msg 
+;;                          (when msg
 ;;                            (string-match-p "^/mastodonc" (mu4e-message-field msg :maildir))))
 ;;            :vars `((user-mail-address      . "matt@mastodonc.com"  )
 ;;                    (mu4e-user-mail-address-list . ("matt@mastodonc.com" "matt.ford@mastodonc.com"))
 ;;                    (user-full-name         . "Matt Ford" )
 ;;                    (mu4e-compose-signature . "Matt\n")
-;;                    (mu4e-sent-folder . "/mastodonc/[Gmail].All Mail") 
-;;                    (mu4e-drafts-folder . "/mastodonc/[Gmail].Drafts") 
-;;                    (mu4e-trash-folder . "/mastodonc/[Gmail].Trash") 
+;;                    (mu4e-sent-folder . "/mastodonc/[Gmail].All Mail")
+;;                    (mu4e-drafts-folder . "/mastodonc/[Gmail].Drafts")
+;;                    (mu4e-trash-folder . "/mastodonc/[Gmail].Trash")
 ;;                    (mu4e-refile-folder . "/mastodonc/[Gmail].All Mail")
 ;;                    (mu4e-bookmarks . ,mu4e-mastodonc-bookmarks)
 ;;                    (smtpmail-smtp-user . "matt.ford@mastodonc.com")
@@ -213,9 +219,9 @@
 ;;                    (user-full-name          . "Matt Ford" )
 ;;                    (mu4e-compose-signature . "Matt\n")
 ;;                    (mu4e-user-mail-address-list  . ("matt@dancingfrog.co.uk" "mattford63@gmail.com"))
-;;                    (mu4e-sent-folder . "/dancingfrog/[Google Mail].All Mail") 
-;;                    (mu4e-drafts-folder . "/dancingfrog/[Google Mail].Drafts") 
-;;                    (mu4e-trash-folder . "/dancingfrog/[Google Mail].Bin") 
+;;                    (mu4e-sent-folder . "/dancingfrog/[Google Mail].All Mail")
+;;                    (mu4e-drafts-folder . "/dancingfrog/[Google Mail].Drafts")
+;;                    (mu4e-trash-folder . "/dancingfrog/[Google Mail].Bin")
 ;;                    (mu4e-refile-folder . "/dancingfrog/[Google Mail].All Mail")
 ;;                    (mu4e-bookmarks . ,mu4e-dancingfrog-bookmarks)
 ;;                    (smtpmail-smtp-user . "mattford63@gmail.com")
@@ -224,11 +230,11 @@
 ;; (setq mu4e-context-policy 'pick-first)
 ;; (setq mu4e-compose-context-policy nil)
 
-;; (add-hook 'mu4e-mark-execute-pre-hook 
-;;           (lambda (mark msg) 
-;;             (cond ((equal mark 'refile) (mu4e-action-retag-message msg "-\\Inbox")) 
-;;                   ((equal mark 'trash) (mu4e-action-retag-message msg "-\\Inbox,-\\Starred")) 
-;;                   ((equal mark 'flag) (mu4e-action-retag-message msg "-\\Inbox,\\Starred")) 
+;; (add-hook 'mu4e-mark-execute-pre-hook
+;;           (lambda (mark msg)
+;;             (cond ((equal mark 'refile) (mu4e-action-retag-message msg "-\\Inbox"))
+;;                   ((equal mark 'trash) (mu4e-action-retag-message msg "-\\Inbox,-\\Starred"))
+;;                   ((equal mark 'flag) (mu4e-action-retag-message msg "-\\Inbox,\\Starred"))
 ;;                   ((equal mark 'unflag) (mu4e-action-retag-message msg "-\\Starred")))))
 
 ;; (setq mu4e-headers-fields '((:human-date . 9)
@@ -249,7 +255,7 @@
 ;; (setq mu4e-confirm-quit nil
 ;;       mu4e-headers-date-format "%d/%b/%Y %H:%M")
 
-;; (add-to-list 'mu4e-view-actions 
+;; (add-to-list 'mu4e-view-actions
 ;;              '("ViewBrowser" . mu4e-action-view-in-browser) t)
 
 ;; ;;(unicode-fonts-setup) ; run once only?
@@ -279,11 +285,11 @@
 (setq pivotal-api-token (cadr pivotal-credentials))
 
 ;;Twitter
-(setq twittering-connection-type-order '(wget curl urllib-http native urllib-https))
-(setq twittering-use-master-password t)
-(setq twittering-icon-mode t)
-(setq twittering-convert-fix-size 64)
-(setq twittering-use-icon-storage t)
+;;(setq twittering-connection-type-order '(wget curl urllib-http native urllib-https))
+;;(setq twittering-use-master-password t)
+;;(setq twittering-icon-mode t)
+;;(setq twittering-convert-fix-size 64)
+;;(setq twittering-use-icon-storage t)
 
 ;; eshell
 (setq terraboot-witan-repo "~/src/github/mastodonc/terraboot-witan/terraform/")
