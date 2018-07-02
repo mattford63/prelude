@@ -36,22 +36,23 @@
                             ;;calfw-org
                             smart-mode-line
                             neotree
+                            pinentry
                             ;;twittering-mode
                             ))
 
 ;; GUI
 (server-start)
 (setq whitespace-style '(face tabs empty))
-;;(disable-theme 'zenburn)
-;;(load-theme 'doom-nord)
+(disable-theme 'zenburn)
+(load-theme 'doom-one-light)
 ;;(doom-themes-org-config)
 ;;(doom-themes-neotree-config)
 ;;(all-the-icons-install-fonts) ; run-once
 ;;(all-the-icons-ivy-setup)
 ;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 ;;(setq neo-theme 'icons)
-(load-theme 'smart-mode-line-light)
-(smart-mode-line-enable)
+;;(load-theme 'smart-mode-line-dark)
+;;(smart-mode-line-enable)
 
 (let ((font-size (if (string-equal system-type "darwin")
                      "14"
@@ -295,7 +296,7 @@
 (setq terraboot-witan-repo "~/src/github/mastodonc/terraboot-witan/terraform/")
 
 (defun eshell/witan (env cmd &rest args)
-  "Wrapper around mach - supply the env, the command and optionally the MFA."
+  "Wrapper around mach - supply the ENV, the CMD and optionally for the ARGS the MFA."
   (let ((default-directory (concat terraboot-witan-repo env))
         (mfa (pop args)))
     (if mfa
