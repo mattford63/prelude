@@ -52,8 +52,8 @@
 ;;(all-the-icons-ivy-setup)
 ;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 ;;(setq neo-theme 'icons)
-;;(load-theme 'smart-mode-line-dark)
-;;(smart-mode-line-enable)
+(load-theme 'smart-mode-line-light)
+(smart-mode-line-enable)
 
 (let ((font-size (if (string-equal system-type "darwin")
                      "14"
