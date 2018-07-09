@@ -39,6 +39,7 @@
                             pinentry
                             ;;twittering-mode
                             mustache-mode
+                            ipcalc
                             ))
 
 ;; GUI
