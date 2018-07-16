@@ -46,13 +46,13 @@
 (server-start)
 (setq whitespace-style '(face tabs empty))
 (disable-theme 'zenburn)
-(load-theme 'doom-one-light)
-;;(doom-themes-org-config)
-;;(doom-themes-neotree-config)
+(load-theme 'doom-one)
+(doom-themes-org-config)
+(doom-themes-neotree-config)
 ;;(all-the-icons-install-fonts) ; run-once
 ;;(all-the-icons-ivy-setup)
-;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-;;(setq neo-theme 'icons)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(setq neo-theme 'icons)
 (load-theme 'smart-mode-line-light)
 (smart-mode-line-enable)
 
