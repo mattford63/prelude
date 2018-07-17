@@ -23,8 +23,8 @@
                             fold-dwim-org
                             org2blog
                             deft
-                            ;;all-the-icons
-                            ;;all-the-icons-dired
+                            all-the-icons
+                            all-the-icons-dired
                             ;;all-the-icons-ivy
                             doom-themes
                             leuven-theme
