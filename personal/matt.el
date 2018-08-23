@@ -143,7 +143,7 @@
 (setq org-tags-exclude-from-inheritance (quote ("crypt")))
 (setq org-crypt-key "68D8501429C42E01")
 
-
+(setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "DONE")))
 ;; (require 'org-gcal)
 ;; (setq org-gcal-credentials (auth-source-user-and-password "org-gcal"))
 ;; (setq org-gcal-client-id (car org-gcal-credentials)
