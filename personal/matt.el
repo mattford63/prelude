@@ -35,6 +35,7 @@
                             ;;calfw
                             ;;calfw-org
                             smart-mode-line
+                            smart-mode-line-powerline-theme
                             neotree
                             pinentry
                             ;;twittering-mode
@@ -45,15 +46,15 @@
 ;; GUI
 (server-start)
 (setq whitespace-style '(face tabs empty))
-(disable-theme 'zenburn)
-(load-theme 'doom-one)
-(doom-themes-org-config)
-(doom-themes-neotree-config)
+;;(disable-theme 'zenburn)
+;;(load-theme 'doom-one-light)
+;;(doom-themes-org-config)
+;;(doom-themes-neotree-config)
 ;;(all-the-icons-install-fonts) ; run-once
 ;;(all-the-icons-ivy-setup)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-(setq neo-theme 'icons)
-(load-theme 'smart-mode-line-light)
+;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;;(setq neo-theme 'icons)
+(load-theme 'smart-mode-line-powerline)
 (smart-mode-line-enable)
 
 (let ((font-size (if (string-equal system-type "darwin")
