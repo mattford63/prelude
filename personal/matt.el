@@ -75,7 +75,7 @@
 ;;(nyan-mode)
 
 ;; Browser
-(setq browse-url-browser-function 'browse-url-chrome)
+(setq browse-url-browser-function 'browse-url-default-macosx-browser)
 
 ;; Who the hell are we?
 (setq user-full-name "Matt Ford"
