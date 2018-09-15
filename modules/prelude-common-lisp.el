@@ -1,6 +1,6 @@
 ;;; prelude-common-lisp.el --- Emacs Prelude: lisp-mode and SLIME config.
 ;;
-;; Copyright © 2011-2017 Bozhidar Batsov
+;; Copyright © 2011-2018 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -56,7 +56,7 @@
 ;; select the default value from slime-lisp-implementations
 (if (and (eq system-type 'darwin)
          (executable-find "ccl"))
-    ;; default to Clozure CL on OS X
+    ;; default to Clozure CL on macOS
     (setq slime-default-lisp 'ccl)
   ;; default to SBCL on Linux and Windows
   (setq slime-default-lisp 'sbcl))
@@ -71,14 +71,13 @@
                                   (smartparens-strict-mode +1)
                                   (whitespace-mode -1)))
 
-(eval-after-load "slime"
-  '(progn
-     (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol
-           slime-fuzzy-completion-in-place t
-           slime-enable-evaluate-in-emacs t
-           slime-autodoc-use-multiline-p t
-           slime-auto-start 'always)
-     (define-key slime-mode-map (kbd "C-c C-s") 'slime-selector)))
+(with-eval-after-load "slime"
+  (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol
+         slime-fuzzy-completion-in-place t
+         slime-enable-evaluate-in-emacs t
+         slime-autodoc-use-multiline-p t
+         slime-auto-start 'always)
+  (define-key slime-mode-map (kbd "C-c C-s") 'slime-selector))
 
 (provide 'prelude-common-lisp)
 
