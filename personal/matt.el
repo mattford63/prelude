@@ -69,7 +69,7 @@
 (nyan-mode)
 
 ;; Browser
-(setq browse-url-browser-function 'browse-url-default-macosx-browser)
+(setq browse-url-browser-function 'browse-url-chrome)
 
 ;; Who the hell are we?
 (setq user-full-name "Matt Ford"
@@ -87,6 +87,8 @@
 
 ;; Python
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt -i")
 
 ;; Deft
 (setq deft-directory "~/src/keybase/feynman"
