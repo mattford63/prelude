@@ -92,6 +92,8 @@
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt -i")
 
+(pyvenv-tracking-mode 1)
+
 ;; Deft
 (setq deft-directory "~/src/keybase/feynman"
       deft-extensions '("org" "md")
