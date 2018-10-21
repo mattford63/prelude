@@ -44,6 +44,8 @@
                             ob-async
                             pyvenv
                             ein
+                            nyan-mode
+                            
                             ))
 
 ;; GUI
