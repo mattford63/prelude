@@ -1,3 +1,15 @@
+(defadvice terminal-init-screen
+    ;; The advice is named `tmux', and is run before `terminal-init-screen' runs.
+    (before tmux activate)
+  ;; Docstring.  This describes the advice and is made available inside emacs;
+  ;; for example when doing C-h f terminal-init-screen RET
+  "Apply xterm keymap, allowing use of keys passed through tmux."
+  ;; This is the elisp code that is run before `terminal-init-screen'.
+  (if (getenv "TMUX")
+      (let ((map (copy-keymap xterm-function-map)))
+        (set-keymap-parent map (keymap-parent input-decode-map))
+        (set-keymap-parent input-decode-map map))))
+
 ;; Packages
 (prelude-require-packages '(visual-fill-column
                             clj-refactor deft
@@ -26,7 +38,7 @@
                             all-the-icons
                             all-the-icons-dired
                             ;;all-the-icons-ivy
-                            ;;doom-themes
+                            doom-themes
                             ;;leuven-theme
                             pivotal-tracker
                             ;;org-gcal
@@ -49,6 +61,7 @@
                             ))
 
 ;; GUI
+(disable-theme 'zenburn)
 (server-start)
 (setq whitespace-style '(face tabs empty))
 (sml/setup)
