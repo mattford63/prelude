@@ -57,7 +57,7 @@
                             pyvenv
                             ein
                             nyan-mode
-                            
+                            realgud
                             ))
 
 ;; GUI
