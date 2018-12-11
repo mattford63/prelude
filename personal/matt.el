@@ -64,6 +64,7 @@
 (disable-theme 'zenburn)
 (server-start)
 (setq whitespace-style '(face tabs empty))
+(set-face-attribute 'region nil :background "#eee")
 (sml/setup)
 
 (let ((font-size (if (string-equal system-type "darwin")
