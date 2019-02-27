@@ -29,7 +29,7 @@
                             company-terraform
                             company-shell
                             ag
-                            leuven-theme
+                            ;;leuven-theme
                             ;;ob-async
                             fold-dwim
                             fold-dwim-org
@@ -38,7 +38,7 @@
                             all-the-icons
                             all-the-icons-dired
                             ;;all-the-icons-ivy
-                            doom-themes
+                            ;;doom-themes
                             ;;leuven-theme
                             pivotal-tracker
                             ;;org-gcal
@@ -61,10 +61,10 @@
                             ))
 
 ;; GUI
-(disable-theme 'zenburn)
+;;(disable-theme 'zenburn)
 (server-start)
-(setq whitespace-style '(face tabs empty))
-(set-face-attribute 'region nil :background "#eee")
+;;(setq whitespace-style '(face tabs empty))
+;;(set-face-attribute 'region nil :background "#eee")
 (sml/setup)
 
 (let ((font-size (if (string-equal system-type "darwin")
