@@ -12,8 +12,8 @@
 
 ;; Packages
 (prelude-require-packages '(visual-fill-column
-                            clj-refactor deft
-                            leuven-theme
+                            clj-refactor
+                            deft
                             dired-sidebar
                             all-the-icons-dired
                             slime
@@ -71,7 +71,20 @@
 ;;(set-face-attribute 'region nil :background "#eee")
 ;; (sml/setup)
 
+(setq doom-modeline-buffer-file-name-style 'truncate-except-project)
+(setq doom-modeline-lsp nil)
+(setq doom-modeline-major-mode-color-icon t)
 (doom-modeline-mode 1)
+(doom-modeline-def-modeline 'my-simple-line
+  '(bar matches buffer-info remote-host parrot selection-info)
+  '(minor-modes input-method major-mode process vcs checker))
+
+(doom-modeline-set-modeline 'my-simple-line 'default)
+
+
+
+
+
 (let ((font-size (if (string-equal system-type "Darwin")
                      "14"
                    "11")))
@@ -80,9 +93,9 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (global-set-key [f9] 'neotree-toggle)
-(global-set-key [f8] 'compose-mail)
+;;(global-set-key [f8] 'compose-mail)
 (global-set-key [f7] 'org-agenda)
-(global-set-key [f6] 'deft)
+;;(global-set-key [f6] 'deft)
 (global-set-key [f5] 'eshell)
 
 (global-set-key (kbd "C-'") 'avy-goto-char)
@@ -112,9 +125,13 @@
 ;; (add-hook 'markdown-mode-hook 'visual-line-mode)
 ;; (add-hook 'markdown-mode-hook 'visual-fill-column-mode)
 
+;; Conda
+(setq conda-anaconda-home "~/miniconda3")
+(setq conda-env-home-directory "~/miniconda3/")
+
 ;; Clojure
 (setq cljr-warn-on-eval t)
-
+(require 'flycheck-joker)
 (add-hook 'clojure-mode-hook 'hs-minor-mode)
 (add-hook 'clojure-mode-hook 'fold-dwim-org/minor-mode)
 
@@ -122,8 +139,24 @@
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt -i")
+(add-hook 'python-mode-hook 'hs-minor-mode)
+(add-hook 'python-mode-hook 'fold-dwim-org/minor-mode)
+;;(pyvenv-tracking-mode 1)
 
-(pyvenv-tracking-mode 1)
+;; Other Languages
+(add-hook 'c-mode-common-hook   'hs-minor-mode)
+(add-hook 'c-mode-common-hook   'fold-dwim-org/minor-mode)
+(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+(add-hook 'emacs-lisp-mode-hook 'fold-dwim-org/minor-mode)
+(add-hook 'java-mode-hook       'hs-minor-mode)
+(add-hook 'java-mode-hook       'fold-dwim-org/minor-mode)
+(add-hook 'lisp-mode-hook       'hs-minor-mode)
+(add-hook 'lisp-mode-hook       'fold-dwim-org/minor-mode)
+(add-hook 'perl-mode-hook       'hs-minor-mode)
+(add-hook 'perl-mode-hook       'fold-dwim-org/minor-mode)
+(add-hook 'sh-mode-hook         'hs-minor-mode)
+(add-hook 'sh-mode-hook         'fold-dwim-org/minor-mode)
+
 
 ;; Deft
 (setq deft-directory "~/src/keybase/feynman"
