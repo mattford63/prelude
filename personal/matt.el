@@ -5,7 +5,7 @@
   ;; for example when doing C-h f terminal-init-screen RET
   "Apply xterm keymap, allowing use of keys passed through tmux."
   ;; This is the elisp code that is run before `terminal-init-screen'.
-  (if (getenv "TMUX")
+  (if (getenv "TUX")
       (let ((map (copy-keymap xterm-function-map)))
         (set-keymap-parent map (keymap-parent input-decode-map))
         (set-keymap-parent input-decode-map map))))
@@ -16,7 +16,6 @@
                             leuven-theme
                             dired-sidebar
                             all-the-icons-dired
-                            magit-gh-pulls
                             slime
                             org-plus-contrib
                             xml-rpc
@@ -38,7 +37,7 @@
                             all-the-icons
                             all-the-icons-dired
                             ;;all-the-icons-ivy
-                            ;;doom-themes
+                            doom-themes
                             ;;leuven-theme
                             pivotal-tracker
                             ;;org-gcal
@@ -58,16 +57,22 @@
                             ein
                             nyan-mode
                             realgud
+                            ess
+                            doom-modeline
+                            perspective
+                            persp-projectile
+                            avy
                             ))
 
 ;; GUI
-;;(disable-theme 'zenburn)
+;;(load-theme 'doom-vibrant)
 (server-start)
 ;;(setq whitespace-style '(face tabs empty))
 ;;(set-face-attribute 'region nil :background "#eee")
-(sml/setup)
+;; (sml/setup)
 
-(let ((font-size (if (string-equal system-type "darwin")
+(doom-modeline-mode 1)
+(let ((font-size (if (string-equal system-type "Darwin")
                      "14"
                    "11")))
   (setq default-frame-alist (list (cons 'font (concat "Monospace-" font-size)))))
@@ -80,9 +85,21 @@
 (global-set-key [f6] 'deft)
 (global-set-key [f5] 'eshell)
 
+(global-set-key (kbd "C-'") 'avy-goto-char)
+(global-set-key (kbd "C-#") 'avy-goto-line)
+
 (setq epa-pinentry-mode 'loopback)
 (pinentry-start)
-(nyan-mode)
+
+;;(nyan-mode)
+
+(persp-mode)
+(require 'persp-projectile)
+(define-key projectile-mode-map (kbd "C-S-s") 'projectile-persp-switch-project)
+(global-set-key (kbd "C-S-a") 'persp-switch)
+
+(require 'symbol-overlay)
+(global-set-key (kbd "M-i") 'symbol-overlay-put)
 
 ;; Browser
 (setq browse-url-browser-function 'browse-url-chrome)
@@ -127,8 +144,8 @@
 (setq projectile-switch-project-action 'projectile-find-file)
 
 ;; Magit
-(require 'magit-gh-pulls)
-(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
+;; (require 'magit-gh-pulls)
+;; (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
 ;; Org
 (org-babel-do-load-languages
