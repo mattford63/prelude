@@ -28,28 +28,19 @@
                             company-terraform
                             company-shell
                             ag
-                            ;;leuven-theme
-                            ;;ob-async
                             fold-dwim
                             fold-dwim-org
                             org2blog
                             deft
                             all-the-icons
                             all-the-icons-dired
-                            ;;all-the-icons-ivy
                             doom-themes
-                            ;;leuven-theme
                             pivotal-tracker
-                            ;;org-gcal
-                            ;;unicode-fonts
+                            org-gcal
                             browse-at-remote
-                            ;;calfw
-                            ;;calfw-org
-                            smart-mode-line
-                            ;;smart-mode-line-powerline-theme
                             neotree
                             pinentry
-                            ;;twittering-mode
+                            twittering-mode
                             mustache-mode
                             ipcalc
                             ob-async
@@ -66,9 +57,10 @@
 
 ;; GUI
 ;;(load-theme 'doom-vibrant)
+(disable-theme 'zenburn)
 (server-start)
-;;(setq whitespace-style '(face tabs empty))
-;;(set-face-attribute 'region nil :background "#eee")
+(setq whitespace-style '(face tabs empty))
+(set-face-attribute 'region nil :background "#eee")
 ;; (sml/setup)
 
 (setq doom-modeline-buffer-file-name-style 'truncate-except-project)
@@ -81,21 +73,14 @@
 
 (doom-modeline-set-modeline 'my-simple-line 'default)
 
-
-
-
-
-(let ((font-size (if (string-equal system-type "Darwin")
-                     "14"
-                   "11")))
-  (setq default-frame-alist (list (cons 'font (concat "Monospace-" font-size)))))
+(set-frame-font "inconsolata-13" nil t)
 
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (global-set-key [f9] 'neotree-toggle)
-;;(global-set-key [f8] 'compose-mail)
+(global-set-key [f8] 'mu4e-compose-new)
 (global-set-key [f7] 'org-agenda)
-;;(global-set-key [f6] 'deft)
+(global-set-key [f6] 'mu4e)
 (global-set-key [f5] 'eshell)
 
 (global-set-key (kbd "C-'") 'avy-goto-char)
@@ -119,7 +104,7 @@
 
 ;; Who the hell are we?
 (setq user-full-name "Matt Ford"
-      user-mail-address "matt@dancingfrog.co.uk")
+      user-mail-address "matt.ford@mastodonc.com")
 
 ;; Markdown
 ;; (add-hook 'markdown-mode-hook 'visual-line-mode)
@@ -179,6 +164,7 @@
 ;; Magit
 ;; (require 'magit-gh-pulls)
 ;; (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
+(setq auto-revert-check-vc-info t)
 
 ;; Org
 (org-babel-do-load-languages
@@ -212,10 +198,24 @@
 
 (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "DONE")))
 
+(setq org-gcal-client-id "102412122628-egcfksdub9jcui6q8mug49e6mdktfsqq.apps.googleusercontent.com"
+      org-gcal-client-secret "wpWyoyP0tLvAtgVQRaOhBlp_"
+      org-gcal-file-alist '(("matt.ford@mastodonc.com" . "~/org/mc-gcal.org")))
+
+(setq org-agenda-files '("~/org"))
+
 ;; EPA Encryption
 (setq epg-gpg-program "gpg2")
 
 ;; Email
+(setq mu4e-maildir "~/Maildir/mc")
+(setq mu4e-drafts-folder "/[Gmail].Drafts")
+(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+(setq mu4e-trash-folder  "/[Gmail].Trash")
+(setq mu4e-view-show-images t)
+(add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+
+(setq message-send-mail-function 'smtpmail-send-it)
 (setq smtpmail-smtp-default-server "smtp.gmail.com")
 (setq smtpmail-smtp-server "smtp.gmail.com")
 (setq smtpmail-smtp-service 587)
@@ -227,11 +227,11 @@
 (setq pivotal-api-token (cadr pivotal-credentials))
 
 ;;Twitter
-;;(setq twittering-connection-type-order '(wget curl urllib-http native urllib-https))
-;;(setq twittering-use-master-password t)
-;;(setq twittering-icon-mode t)
-;;(setq twittering-convert-fix-size 64)
-;;(setq twittering-use-icon-storage t)
+(setq twittering-connection-type-order '(wget curl urllib-http native urllib-https))
+(setq twittering-use-master-password t)
+(setq twittering-icon-mode t)
+(setq twittering-convert-fix-size 64)
+(setq twittering-use-icon-storage t)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
