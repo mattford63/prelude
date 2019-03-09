@@ -86,21 +86,22 @@
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
 
-(setq epa-pinentry-mode 'loopback)
-(pinentry-start)
+(if (not (eq system-type 'gnu/linux))
+    (do (setq epa-pinentry-mode 'loopback)
+        (pinentry-start)))
 
 ;;(nyan-mode)
 
-(persp-mode)
-(require 'persp-projectile)
-(define-key projectile-mode-map (kbd "C-S-s") 'projectile-persp-switch-project)
-(global-set-key (kbd "C-S-a") 'persp-switch)
+;;(persp-mode)
+;;(require 'persp-projectile)
+;;(define-key projectile-mode-map (kbd "C-S-s") 'projectile-persp-switch-project)
+;;(global-set-key (kbd "C-S-a") 'persp-switch)
 
 (require 'symbol-overlay)
 (global-set-key (kbd "M-i") 'symbol-overlay-put)
 
 ;; Browser
-(setq browse-url-browser-function 'browse-url-chrome)
+(setq browse-url-browser-function 'browse-url-firefox)
 
 ;; Who the hell are we?
 (setq user-full-name "Matt Ford"
@@ -142,7 +143,6 @@
 (add-hook 'sh-mode-hook         'hs-minor-mode)
 (add-hook 'sh-mode-hook         'fold-dwim-org/minor-mode)
 
-
 ;; Deft
 (setq deft-directory "~/src/keybase/feynman"
       deft-extensions '("org" "md")
@@ -155,15 +155,10 @@
         (nospace . "-")
         (case-fn . downcase)))
 
-;; Dired Tree
-;;(all-the-icons-dired-mode)
-
 ;; Projectile
 (setq projectile-switch-project-action 'projectile-find-file)
 
 ;; Magit
-;; (require 'magit-gh-pulls)
-;; (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 (setq auto-revert-check-vc-info t)
 
 ;; Org
@@ -183,10 +178,13 @@
 (setq org2blog/wp-blog-alist
       '(("Witan"
          :url "https://witanblog.wordpress.com/xmlrpc.php"
-         :username "mattford63")
+         :username (car (auth-source-user-and-password "witanblog.wordpress.com"))
+         :password (cadr (auth-source-user-and-password "witanblog.wordpress.com")))
+        
         ("Dancingfrog"
          :url "https://dancingfrogsite.wordpress.com/xmlrpc.php"
-         :username "mattford63")))
+         :username (car (auth-source-user-and-password "dancingfrogsite.wordpress.com"))
+         :password (cadr (auth-source-user-and-password "dancingfrogsite.wordpress.com")))))
 
 (setq org2blog/wp-shortcode-langs-map '(("elisp" . "text")))
 (setq org2blog/wp-use-sourcecode-shortcode t)
@@ -199,8 +197,11 @@
 (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "DONE")))
 
 (setq org-gcal-client-id "102412122628-egcfksdub9jcui6q8mug49e6mdktfsqq.apps.googleusercontent.com"
-      org-gcal-client-secret "wpWyoyP0tLvAtgVQRaOhBlp_"
+      org-gcal-client-secret (cadr (auth-source-user-and-password "org.gcal"))
       org-gcal-file-alist '(("matt.ford@mastodonc.com" . "~/org/mc-gcal.org")))
+
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
 (setq org-agenda-files '("~/org"))
 
@@ -208,19 +209,25 @@
 (setq epg-gpg-program "gpg2")
 
 ;; Email
+(require 'mu4e)
 (setq mu4e-maildir "~/Maildir/mc")
 (setq mu4e-drafts-folder "/[Gmail].Drafts")
 (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
 (setq mu4e-trash-folder  "/[Gmail].Trash")
 (setq mu4e-view-show-images t)
 (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+(setq mu4e-change-filenames-when-moving t)
+(setq mu4e-get-mail-command "mbsync mc")
+
 
 (setq message-send-mail-function 'smtpmail-send-it)
 (setq smtpmail-smtp-default-server "smtp.gmail.com")
 (setq smtpmail-smtp-server "smtp.gmail.com")
 (setq smtpmail-smtp-service 587)
 (setq smtpmail-smtp-user "mattford63@gmail.com")
-(setq smtpmail-smtp-service 587)
+(setq smtpmail-queue-mail nil  ;; start in normal mode
+      smtpmail-queue-dir   "~/Maildir/queue/cur")
+
 
 ;; Pivotal
 (setq pivotal-credentials (auth-source-user-and-password "pivotal"))
