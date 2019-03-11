@@ -156,15 +156,14 @@
 (require 'org2blog-autoloads)
 
 (setq org2blog/wp-blog-alist
-      '(("Witan"
+      `(("Witan"
          :url "https://witanblog.wordpress.com/xmlrpc.php"
-         :username (car (auth-source-user-and-password "witanblog.wordpress.com"))
-         :password (cadr (auth-source-user-and-password "witanblog.wordpress.com")))
-        
+         :username ,(car (auth-source-user-and-password "witanblog.wordpress.com"))
+         :password ,(cadr (auth-source-user-and-password "witanblog.wordpress.com")))
         ("Dancingfrog"
          :url "https://dancingfrogsite.wordpress.com/xmlrpc.php"
-         :username (car (auth-source-user-and-password "dancingfrogsite.wordpress.com"))
-         :password (cadr (auth-source-user-and-password "dancingfrogsite.wordpress.com")))))
+         :username ,(car (auth-source-user-and-password "dancingfrogsite.wordpress.com"))
+         :password ,(cadr (auth-source-user-and-password "dancingfrogsite.wordpress.com")))))
 
 (setq org2blog/wp-shortcode-langs-map '(("elisp" . "text")))
 (setq org2blog/wp-use-sourcecode-shortcode t)
