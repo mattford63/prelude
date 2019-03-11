@@ -31,7 +31,6 @@
                             fold-dwim
                             fold-dwim-org
                             org2blog
-                            deft
                             all-the-icons
                             all-the-icons-dired
                             doom-themes
@@ -51,17 +50,17 @@
                             ess
                             doom-modeline
                             perspective
-                            persp-projectile
                             avy
+                            ess
+                            symbol-overlay
+                            flycheck-joker
                             ))
 
 ;; GUI
-;;(load-theme 'doom-vibrant)
 (disable-theme 'zenburn)
 (server-start)
 (setq whitespace-style '(face tabs empty))
 (set-face-attribute 'region nil :background "#eee")
-;; (sml/setup)
 
 (setq doom-modeline-buffer-file-name-style 'truncate-except-project)
 (setq doom-modeline-lsp nil)
@@ -70,38 +69,31 @@
 (doom-modeline-def-modeline 'my-simple-line
   '(bar matches buffer-info remote-host parrot selection-info)
   '(minor-modes input-method major-mode process vcs checker))
-
 (doom-modeline-set-modeline 'my-simple-line 'default)
 
-(set-frame-font "inconsolata-13" nil t)
+(if (eq system-type 'gnu/linux)
+    (set-frame-font "inconsolata-13" nil t))
 
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (global-set-key [f9] 'neotree-toggle)
-(global-set-key [f8] 'mu4e-compose-new)
-(global-set-key [f7] 'org-agenda)
-(global-set-key [f6] 'mu4e)
+(global-set-key [f8] 'org-agenda)
+(global-set-key [f7] 'mu4e)
+(global-set-key [f6] 'ansi-term)
 (global-set-key [f5] 'eshell)
 
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
 
-(if (not (eq system-type 'gnu/linux))
-    (do (setq epa-pinentry-mode 'loopback)
-        (pinentry-start)))
-
-;;(nyan-mode)
-
-;;(persp-mode)
-;;(require 'persp-projectile)
-;;(define-key projectile-mode-map (kbd "C-S-s") 'projectile-persp-switch-project)
-;;(global-set-key (kbd "C-S-a") 'persp-switch)
+(when (not (eq system-type 'gnu/linux))
+  (setq epg-pinentry-mode 'loopback)
+  (pinentry-start))
 
 (require 'symbol-overlay)
 (global-set-key (kbd "M-i") 'symbol-overlay-put)
 
 ;; Browser
-(setq browse-url-browser-function 'browse-url-firefox)
+(setq browse-url-browser-function 'browse-url-default-browser)
 
 ;; Who the hell are we?
 (setq user-full-name "Matt Ford"
@@ -142,18 +134,6 @@
 (add-hook 'perl-mode-hook       'fold-dwim-org/minor-mode)
 (add-hook 'sh-mode-hook         'hs-minor-mode)
 (add-hook 'sh-mode-hook         'fold-dwim-org/minor-mode)
-
-;; Deft
-(setq deft-directory "~/src/keybase/feynman"
-      deft-extensions '("org" "md")
-      deft-recursive t
-      deft-use-filename-as-title nil
-      deft-use-filter-string-for-filename t)
-
-(setq deft-file-naming-rules
-      '((noslash . "-")
-        (nospace . "-")
-        (case-fn . downcase)))
 
 ;; Projectile
 (setq projectile-switch-project-action 'projectile-find-file)
@@ -209,6 +189,9 @@
 (setq epg-gpg-program "gpg2")
 
 ;; Email
+
+(when (eq system-type 'darwin)
+  (add-to-list 'load-path "~/.emacs.d/elisp/mu4e"))
 (require 'mu4e)
 (setq mu4e-maildir "~/Maildir/mc")
 (setq mu4e-drafts-folder "/[Gmail].Drafts")
