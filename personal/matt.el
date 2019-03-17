@@ -31,6 +31,7 @@
                             fold-dwim
                             fold-dwim-org
                             org2blog
+                            org-gcal
                             all-the-icons
                             all-the-icons-dired
                             doom-themes
@@ -54,6 +55,8 @@
                             ess
                             symbol-overlay
                             flycheck-joker
+                            elfeed
+                            elfeed-org
                             ))
 
 ;; GUI
@@ -184,6 +187,10 @@
 
 (setq org-agenda-files '("~/org"))
 
+(require 'elfeed-org)
+(elfeed-org)
+(setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
+
 ;; EPA Encryption
 (setq epg-gpg-program "gpg2")
 
@@ -288,6 +295,7 @@
 (setq smtpmail-queue-mail nil  ;; start in normal mode
       smtpmail-queue-dir   "~/Maildir/queue/cur")
 
+(setq mu4e-update-interval 300) 
 
 ;; Pivotal
 (setq pivotal-credentials (auth-source-user-and-password "pivotal"))
