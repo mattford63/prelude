@@ -57,6 +57,7 @@
                             flycheck-joker
                             elfeed
                             elfeed-org
+                            conda
                             ))
 
 ;; GUI
@@ -295,7 +296,8 @@
 (setq smtpmail-queue-mail nil  ;; start in normal mode
       smtpmail-queue-dir   "~/Maildir/queue/cur")
 
-(setq mu4e-update-interval 300) 
+(setq mu4e-update-interval 300)
+(setq mu4e-use-fancy-chars nil)
 
 ;; Pivotal
 (setq pivotal-credentials (auth-source-user-and-password "pivotal"))
