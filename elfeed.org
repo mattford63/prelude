@@ -4,6 +4,10 @@
 **** http://planet.emacslife.com/atom.xml                               
 *** Clojure                                                         :clojure:
 **** http://planet.clojure.in/atom.xml 
+**** http://feeds.soundcloud.com/users/soundcloud:users:220484243/sounds.rss :podcast:
+**** https://www.youtube.com/feeds/videos.xml?channel_id=UCaLlzGqiPE2QRj6sSOawJRg :youtube:
 ** Enjoyment                                                      :enjoyment:
 *** Comics                                                           :comics:
 **** https://xkcd.com/atom.xml 
+** Maths                                                              :maths:
+*** https://www.numberphile.com/podcast?format=rss                  :podcast:
