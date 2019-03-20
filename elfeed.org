@@ -11,3 +11,5 @@
 **** https://xkcd.com/atom.xml 
 ** Maths                                                              :maths:
 *** https://www.numberphile.com/podcast?format=rss                  :podcast:
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw :youtube:
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCoxcjq-8xIDTYp3uz647V5A :youtube:
