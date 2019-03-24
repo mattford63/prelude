@@ -6,6 +6,7 @@
 **** http://planet.clojure.in/atom.xml 
 **** http://feeds.soundcloud.com/users/soundcloud:users:220484243/sounds.rss :podcast:
 **** https://www.youtube.com/feeds/videos.xml?channel_id=UCaLlzGqiPE2QRj6sSOawJRg :youtube:
+**** https://lispcast.com/feed/podcast/a-theory-of-functional-programming :podcast:
 ** Enjoyment                                                      :enjoyment:
 *** Comics                                                           :comics:
 **** https://xkcd.com/atom.xml 
