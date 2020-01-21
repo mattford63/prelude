@@ -56,6 +56,7 @@
                             elfeed-org
                             conda
                             markdown-preview-mode
+                            shell-pop
                             ))
 
 ;; GUI
@@ -76,6 +77,13 @@
 ;;   '(minor-modes input-method major-mode process vcs checker))
 ;; (doom-modeline-set-modeline 'my-simple-line 'default)
 
+
+(setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell))))
+      shell-pop-term-shell "/bin/bash"
+      shell-pop-full-span t
+      shell-pop-window-size 30
+      shell-pop-window-position "bottom")
+
 (if (eq system-type 'gnu/linux)
     (set-frame-font "inconsolata-13" nil t))
 
@@ -84,7 +92,7 @@
 (global-set-key [f9] 'neotree-toggle)
 (global-set-key [f8] 'org-agenda)
 ;;(global-set-key [f7] 'mu4e)
-(global-set-key [f5] 'ansi-term)
+(global-set-key [f5] 'shell-pop)
 (global-set-key [f6] 'eshell)
 
 (global-set-key (kbd "C-'") 'avy-goto-char)
@@ -179,7 +187,7 @@
 (require 'org-crypt)
 (org-crypt-use-before-save-magic)
 (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-(setq org-crypt-key "68D8501429C42E01")
+(setq org-crypt-key "AD1E3F7D4300D6A252E0542265FFC7318AFE2318")
 
 (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "DONE")))
 
