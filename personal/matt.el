@@ -157,7 +157,7 @@
 (add-to-list 'markdown-preview-stylesheets "https://raw.githubusercontent.com/richleland/pygments-css/master/emacs.css")
 
 ;; Projectile
-(setq projectile-switch-project-action 'projectile-find-file)
+(setq projectile-switch-project-action 'projectile-commander)
 
 ;; Magit
 (setq auto-revert-check-vc-info t)
