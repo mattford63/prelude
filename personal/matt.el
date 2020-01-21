@@ -34,7 +34,6 @@
                             all-the-icons
                             all-the-icons-dired
                             ;;doom-themes
-                            ;;pivotal-tracker
                             org-gcal
                             browse-at-remote
                             neotree
@@ -44,7 +43,6 @@
                             ipcalc
                             ob-async
                             pyvenv
-                            ;;ein
                             nyan-mode
                             realgud
                             ess
@@ -100,11 +98,15 @@
 (global-set-key (kbd "M-i") 'symbol-overlay-put)
 
 ;; Browser
-(setq brow 'browse-url-default-browser)
+(setq browser 'browse-url-default-browser)
 
 ;; Who the hell are we?
 (setq user-full-name "Matt Ford"
       user-mail-address "matt@dancingfrog.co.uk")
+
+
+;; Git
+(setq transient-default-level 5)
 
 ;; Markdown
 ;; (add-hook 'markdown-mode-hook 'visual-line-mode)
