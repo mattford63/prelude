@@ -78,8 +78,8 @@
 ;; (doom-modeline-set-modeline 'my-simple-line 'default)
 
 
-(setq ;;shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell))))
-      shell-pop-shell-type (quote ("shell" "*shell*" (lambda nil (shell))))
+(setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell))))
+      ;;shell-pop-shell-type (quote ("shell" "*shell*" (lambda nil (shell))))
       shell-pop-term-shell "/bin/bash"
       shell-pop-full-span t
       shell-pop-window-size 30
