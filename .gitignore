@@ -15,7 +15,6 @@ custom.el
 places
 .smex-items
 savefile/
-projectile-bookmarks.eld
 session*
 .cask
 tramp

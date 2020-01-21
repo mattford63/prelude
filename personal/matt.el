@@ -57,6 +57,8 @@
                             conda
                             markdown-preview-mode
                             shell-pop
+                            grip-mode
+                            ox-gfm
                             ))
 
 ;; GUI
@@ -120,6 +122,9 @@
 ;; Markdown
 ;; (add-hook 'markdown-mode-hook 'visual-line-mode)
 ;; (add-hook 'markdown-mode-hook 'visual-fill-column-mode)
+(setq markdown-preview-stylesheets (list "http://thomasf.github.io/solarized-css/solarized-light.min.css"))
+(add-to-list 'markdown-preview-stylesheets "https://raw.githubusercontent.com/richleland/pygments-css/master/emacs.css")
+(define-key markdown-mode-command-map (kbd "g") #'grip-mode)
 
 ;; Conda
 ;; (setq conda-anaconda-home "~/miniconda3")
@@ -152,9 +157,6 @@
 ;; (add-hook 'perl-mode-hook       'fold-dwim-org/minor-mode)
 ;; (add-hook 'sh-mode-hook         'hs-minor-mode)
 ;; (add-hook 'sh-mode-hook         'fold-dwim-org/minor-mode)
-
-(setq markdown-preview-stylesheets (list "http://thomasf.github.io/solarized-css/solarized-light.min.css"))
-(add-to-list 'markdown-preview-stylesheets "https://raw.githubusercontent.com/richleland/pygments-css/master/emacs.css")
 
 ;; Projectile
 (setq projectile-switch-project-action 'projectile-commander)
