@@ -33,7 +33,7 @@
                             org-gcal
                             all-the-icons
                             all-the-icons-dired
-                            ;;doom-themes
+                            doom-themes
                             org-gcal
                             browse-at-remote
                             neotree
