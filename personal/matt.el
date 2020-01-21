@@ -22,7 +22,6 @@
                             metaweblog
                             htmlize
                             terraform-mode
-                            ;; docker
                             docker-cli
                             docker-compose-mode
                             dockerfile-mode
@@ -186,8 +185,8 @@
 ;;       org-gcal-client-secret (cadr (auth-source-user-and-password "org.gcal"))
 ;;       org-gcal-file-alist '(("matt.ford@mastodonc.com" . "~/org/mc-gcal.org")))
 
-(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
-(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+;;(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+;;(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
 (setq org-agenda-files '("~/org"))
 
@@ -196,7 +195,7 @@
 (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
 
 ;; EPA Encryption
-(setq epg-gpg-program "gpg2")
+(setq epg-gpg-program "gpg")
 
 ;; Email
 (when (eq system-type 'darwin)
