@@ -29,3 +29,7 @@ prelude-cheatsheet.log
 /smex-items
 /anaconda-mode
 /org-gcal/.org-gcal-token
+/.lsp-session-v1
+/transient/
+/prelude
+/forge-database.sqlite
