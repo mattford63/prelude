@@ -78,7 +78,8 @@
 ;; (doom-modeline-set-modeline 'my-simple-line 'default)
 
 
-(setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell))))
+(setq ;;shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell))))
+      shell-pop-shell-type (quote ("shell" "*shell*" (lambda nil (shell))))
       shell-pop-term-shell "/bin/bash"
       shell-pop-full-span t
       shell-pop-window-size 30
@@ -103,7 +104,7 @@
   (pinentry-start))
 
 (require 'symbol-overlay)
-(global-set-key (kbd "M-i") 'symbol-overlay-put)
+;;(global-set-key (kbd "M-i") 'symbol-overlay-put)
 
 ;; Browser
 (setq browser 'browse-url-default-browser)
