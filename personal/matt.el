@@ -22,11 +22,11 @@
                             metaweblog
                             htmlize
                             terraform-mode
+                            ;; docker
+                            docker-cli
+                            docker-compose-mode
                             dockerfile-mode
                             puppet-mode
-                            counsel-projectile
-                            company-terraform
-                            company-shell
                             ag
                             fold-dwim
                             fold-dwim-org
@@ -34,8 +34,8 @@
                             org-gcal
                             all-the-icons
                             all-the-icons-dired
-                            doom-themes
-                            pivotal-tracker
+                            ;;doom-themes
+                            ;;pivotal-tracker
                             org-gcal
                             browse-at-remote
                             neotree
@@ -45,11 +45,11 @@
                             ipcalc
                             ob-async
                             pyvenv
-                            ein
+                            ;;ein
                             nyan-mode
                             realgud
                             ess
-                            doom-modeline
+                            ;;doom-modeline
                             perspective
                             avy
                             ess
@@ -62,19 +62,22 @@
                             ))
 
 ;; GUI
-(disable-theme 'zenburn)
+;; (disable-theme 'zenburn)
 (server-start)
-(setq whitespace-style '(face tabs empty))
-(set-face-attribute 'region nil :background "#eee")
 
-(setq doom-modeline-buffer-file-name-style 'truncate-except-project)
-(setq doom-modeline-lsp nil)
-(setq doom-modeline-major-mode-color-icon t)
-(doom-modeline-mode 1)
-(doom-modeline-def-modeline 'my-simple-line
-  '(bar matches buffer-info remote-host parrot selection-info)
-  '(minor-modes input-method major-mode process vcs checker))
-(doom-modeline-set-modeline 'my-simple-line 'default)
+(setq lsp-prefer-flymake nil)
+
+;; (setq whitespace-style '(face tabs empty))
+;; (set-face-attribute 'region nil :background "#eee")
+
+;; (setq doom-modeline-buffer-file-name-style 'truncate-except-project)
+;; (setq doom-modeline-lsp nil)
+;; (setq doom-modeline-major-mode-color-icon t)
+;; (doom-modeline-mode 1)
+;; (doom-modeline-def-modeline 'my-simple-line
+;;   '(bar matches buffer-info remote-host parrot selection-info)
+;;   '(minor-modes input-method major-mode process vcs checker))
+;; (doom-modeline-set-modeline 'my-simple-line 'default)
 
 (if (eq system-type 'gnu/linux)
     (set-frame-font "inconsolata-13" nil t))
@@ -83,34 +86,34 @@
 
 (global-set-key [f9] 'neotree-toggle)
 (global-set-key [f8] 'org-agenda)
-(global-set-key [f7] 'mu4e)
-(global-set-key [f6] 'ansi-term)
-(global-set-key [f5] 'eshell)
+;;(global-set-key [f7] 'mu4e)
+(global-set-key [f5] 'ansi-term)
+(global-set-key [f6] 'eshell)
 
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
 
 (when (not (eq system-type 'gnu/linux))
-  (setq epg-pinentry-mode 'loopback)
+  se-url-browser-function  (setq epg-pinentry-mode 'loopback)
   (pinentry-start))
 
 (require 'symbol-overlay)
 (global-set-key (kbd "M-i") 'symbol-overlay-put)
 
 ;; Browser
-(setq browse-url-browser-function 'browse-url-default-browser)
+(setq brow 'browse-url-default-browser)
 
 ;; Who the hell are we?
 (setq user-full-name "Matt Ford"
-      user-mail-address "matt.ford@mastodonc.com")
+      user-mail-address "matt@dancingfrog.co.uk")
 
 ;; Markdown
 ;; (add-hook 'markdown-mode-hook 'visual-line-mode)
 ;; (add-hook 'markdown-mode-hook 'visual-fill-column-mode)
 
 ;; Conda
-(setq conda-anaconda-home "~/miniconda3")
-(setq conda-env-home-directory "~/miniconda3/")
+;; (setq conda-anaconda-home "~/miniconda3")
+;; (setq conda-env-home-directory "~/miniconda3/")
 
 ;; Clojure
 (setq cljr-warn-on-eval t)
@@ -127,18 +130,18 @@
 ;;(pyvenv-tracking-mode 1)
 
 ;; Other Languages
-(add-hook 'c-mode-common-hook   'hs-minor-mode)
-(add-hook 'c-mode-common-hook   'fold-dwim-org/minor-mode)
-(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-(add-hook 'emacs-lisp-mode-hook 'fold-dwim-org/minor-mode)
-(add-hook 'java-mode-hook       'hs-minor-mode)
-(add-hook 'java-mode-hook       'fold-dwim-org/minor-mode)
-(add-hook 'lisp-mode-hook       'hs-minor-mode)
-(add-hook 'lisp-mode-hook       'fold-dwim-org/minor-mode)
-(add-hook 'perl-mode-hook       'hs-minor-mode)
-(add-hook 'perl-mode-hook       'fold-dwim-org/minor-mode)
-(add-hook 'sh-mode-hook         'hs-minor-mode)
-(add-hook 'sh-mode-hook         'fold-dwim-org/minor-mode)
+;; (add-hook 'c-mode-common-hook   'hs-minor-mode)
+;; (add-hook 'c-mode-common-hook   'fold-dwim-org/minor-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'fold-dwim-org/minor-mode)
+;; (add-hook 'java-mode-hook       'hs-minor-mode)
+;; (add-hook 'java-mode-hook       'fold-dwim-org/minor-mode)
+;; (add-hook 'lisp-mode-hook       'hs-minor-mode)
+;; (add-hook 'lisp-mode-hook       'fold-dwim-org/minor-mode)
+;; (add-hook 'perl-mode-hook       'hs-minor-mode)
+;; (add-hook 'perl-mode-hook       'fold-dwim-org/minor-mode)
+;; (add-hook 'sh-mode-hook         'hs-minor-mode)
+;; (add-hook 'sh-mode-hook         'fold-dwim-org/minor-mode)
 
 (setq markdown-preview-stylesheets (list "http://thomasf.github.io/solarized-css/solarized-light.min.css"))
 (add-to-list 'markdown-preview-stylesheets "https://raw.githubusercontent.com/richleland/pygments-css/master/emacs.css")
@@ -164,11 +167,7 @@
 (require 'org2blog-autoloads)
 
 (setq org2blog/wp-blog-alist
-      `(("Witan"
-         :url "https://witanblog.wordpress.com/xmlrpc.php"
-         :username ,(car (auth-source-user-and-password "witanblog.wordpress.com"))
-         :password ,(cadr (auth-source-user-and-password "witanblog.wordpress.com")))
-        ("Dancingfrog"
+      `(("Dancingfrog"
          :url "https://dancingfrogsite.wordpress.com/xmlrpc.php"
          :username ,(car (auth-source-user-and-password "dancingfrogsite.wordpress.com"))
          :password ,(cadr (auth-source-user-and-password "dancingfrogsite.wordpress.com")))))
@@ -183,9 +182,9 @@
 
 (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "DONE")))
 
-(setq org-gcal-client-id "102412122628-egcfksdub9jcui6q8mug49e6mdktfsqq.apps.googleusercontent.com"
-      org-gcal-client-secret (cadr (auth-source-user-and-password "org.gcal"))
-      org-gcal-file-alist '(("matt.ford@mastodonc.com" . "~/org/mc-gcal.org")))
+;; (setq org-gcal-client-id "102412122628-egcfksdub9jcui6q8mug49e6mdktfsqq.apps.googleusercontent.com"
+;;       org-gcal-client-secret (cadr (auth-source-user-and-password "org.gcal"))
+;;       org-gcal-file-alist '(("matt.ford@mastodonc.com" . "~/org/mc-gcal.org")))
 
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
@@ -219,7 +218,7 @@
 ;;           :enter-func (lambda () (mu4e-message "Entering Private context"))
 ;;           :leave-func (lambda () (mu4e-message "Leaving Private context"))
 ;;           :match-func (lambda (msg)
-;;                         (when msg 
+;;                         (when msg
 ;;                           (string-match-p "^/df" (mu4e-message-field msg :maildir))))
 ;;           :vars '( ( user-mail-address      . "matt@dancingfrog.co.uk"  )
 ;;                    ( user-full-name         . "Matt Ford" )
