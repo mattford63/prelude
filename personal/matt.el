@@ -67,7 +67,7 @@
 
 (setq lsp-prefer-flymake nil)
 
-;; (setq whitespace-style '(face tabs empty))
+(setq whitespace-style '(face empty trailing tab-mark))
 ;; (set-face-attribute 'region nil :background "#eee")
 
 ;; (setq doom-modeline-buffer-file-name-style 'truncate-except-project)
