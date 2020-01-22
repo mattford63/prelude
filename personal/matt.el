@@ -67,7 +67,7 @@
 
 (setq lsp-prefer-flymake nil)
 
-(setq whitespace-style '(face empty trailing tab-mark))
+(setq whitespace-style '(face empty trailing))
 ;; (set-face-attribute 'region nil :background "#eee")
 
 ;; (setq doom-modeline-buffer-file-name-style 'truncate-except-project)
@@ -160,6 +160,7 @@
 
 ;; Projectile
 (setq projectile-switch-project-action 'projectile-commander)
+(setq projectile-project-search-path '("~/src"))
 
 ;; Magit
 (setq auto-revert-check-vc-info t)

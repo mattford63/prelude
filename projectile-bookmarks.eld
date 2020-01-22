@@ -1,1 +1,0 @@
-("~/src/prelude/" "~/src/travelex-vscode/src/cis/" "~/src/travelex-vscode/infra-live/" "~/src/travelex-vscode/infra-modules/" "~/src/travelex-vscode/")
