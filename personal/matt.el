@@ -59,7 +59,10 @@
                             shell-pop
                             grip-mode
                             ox-gfm
+                            slack
                             ))
+
+(setq alert-default-style 'libnotify)
 
 ;; GUI
 ;; (disable-theme 'zenburn)
@@ -92,14 +95,30 @@
 
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-(global-set-key [f9] 'neotree-toggle)
+(global-set-key [f9] 'slack-all-unreads)
 (global-set-key [f8] 'org-agenda)
 ;;(global-set-key [f7] 'mu4e)
 (global-set-key [f5] 'shell-pop)
 (global-set-key [f6] 'eshell)
 
+
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
+
+(global-set-key (kbd "C-c C-s u") 'slack-all-unreads)
+(global-set-key (kbd "C-c C-s c") 'slack-channel-select)
+(global-set-key (kbd "C-c C-s s") 'slack-search-from-messages)
+(global-set-key (kbd "C-c C-s r") 'slack-message-add-reaction)
+(global-set-key (kbd "C-c C-s R") 'slack-message-remove-reaction)
+(global-set-key (kbd "C-c C-s p") 'slack-message-pins-add)
+(global-set-key (kbd "C-c C-s P") 'slack-message-pins-remove)
+(global-set-key (kbd "C-C C-s C-p") 'slack-room-pins-list)
+(global-set-key (kbd "C-c C-s e") 'slack-message-embed-mention)
+(global-set-key (kbd "C-c C-s E") 'slack-message-embed-channel)
+(global-set-key (kbd "C-c C-s I") 'slack-user-select)
+(global-set-key (kbd "C-c C-s i") 'slack-im-select)
+(global-set-key (kbd "C-c C-s b") 'slack-message-write-another-buffer)
+(global-set-key (kbd "C-c C-s f") 'slack-file-upload)
 
 (when (not (eq system-type 'gnu/linux))
   se-url-browser-function  (setq epg-pinentry-mode 'loopback)
@@ -115,6 +134,16 @@
 (setq user-full-name "Matt Ford"
       user-mail-address "matt@dancingfrog.co.uk")
 
+;; Slack
+
+(setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
+(setq slack-prefer-current-team t)
+(slack-register-team
+ :name "cloudsolutionshq"
+ :default t
+ :token (cadr (auth-source-user-and-password "cloudsolutionshq"))
+ :subscribed-channels '()
+ :full-and-display-names t)
 
 ;; Git
 (setq transient-default-level 5)
@@ -325,6 +354,9 @@
 (setq twittering-icon-mode t)
 (setq twittering-convert-fix-size 64)
 (setq twittering-use-icon-storage t)
+
+;; Slack
+(slack-start)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
