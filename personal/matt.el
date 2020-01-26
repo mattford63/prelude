@@ -101,6 +101,7 @@
 (global-set-key [f5] 'shell-pop)
 (global-set-key [f6] 'eshell)
 
+(setq aw-dispatch-always t)
 
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
