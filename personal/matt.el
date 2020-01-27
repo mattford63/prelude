@@ -118,6 +118,7 @@
 (global-set-key (kbd "C-c C-s E") 'slack-message-embed-channel)
 (global-set-key (kbd "C-c C-s I") 'slack-user-select)
 (global-set-key (kbd "C-c C-s i") 'slack-im-select)
+(global-set-key (kbd "C-c C-s g") 'slack-group-select)
 (global-set-key (kbd "C-c C-s b") 'slack-message-write-another-buffer)
 (global-set-key (kbd "C-c C-s f") 'slack-file-upload)
 
