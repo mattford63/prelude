@@ -60,6 +60,8 @@
                             grip-mode
                             ox-gfm
                             slack
+                            org-download
+                            org-drill
                             ))
 
 (setq alert-default-style 'libnotify)
@@ -99,9 +101,10 @@
 (global-set-key [f8] 'org-agenda)
 ;;(global-set-key [f7] 'mu4e)
 (global-set-key [f5] 'shell-pop)
-(global-set-key [f6] 'eshell)
+(global-set-key [f6] 'org-brain-visualize)
 
-(setq aw-dispatch-always t)
+(setq aw-dispatch-always nil)
+(setq undo-tree-enable-undo-in-region t)
 
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
@@ -122,9 +125,9 @@
 (global-set-key (kbd "C-c C-s b") 'slack-message-write-another-buffer)
 (global-set-key (kbd "C-c C-s f") 'slack-file-upload)
 
-(when (not (eq system-type 'gnu/linux))
-  se-url-browser-function  (setq epg-pinentry-mode 'loopback)
-  (pinentry-start))
+;(when (not (eq system-type 'gnu/linux))
+;  (setq epg-pinentry-mode 'loopback)
+;  (pinentry-mac))
 
 (require 'symbol-overlay)
 ;;(global-set-key (kbd "M-i") 'symbol-overlay-put)
@@ -239,6 +242,10 @@
 (elfeed-org)
 (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
 
+(require 'org-drill)
+(require 'org-download)
+(add-hook 'dired-mode-hook 'org-download-enable)
+
 ;; EPA Encryption
 (setq epg-gpg-program "gpg")
 
@@ -349,6 +356,9 @@
 ;; ;; Pivotal
 ;; (setq pivotal-credentials (auth-source-user-and-password "pivotal"))
 ;; (setq pivotal-api-token (cadr pivotal-credentials))
+
+
+
 
 ;;Twitter
 (setq twittering-connection-type-order '(wget curl urllib-http native urllib-https))
