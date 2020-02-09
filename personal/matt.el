@@ -143,12 +143,21 @@
 
 (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
 (setq slack-prefer-current-team t)
+
 (slack-register-team
  :name "cloudsolutionshq"
- :default t
+ :default nil
  :token (cadr (auth-source-user-and-password "cloudsolutionshq"))
  :subscribed-channels '()
  :full-and-display-names t)
+
+(slack-register-team
+ :name "clojurians"
+ :default t
+ :token (cadr (auth-source-user-and-password "clojurians"))
+ :subscribed-channels '()
+ :full-and-display-names t)
+
 
 ;; Git
 (setq transient-default-level 5)
