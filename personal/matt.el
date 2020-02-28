@@ -238,6 +238,19 @@
 
 (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "DONE")))
 
+(setq org-structure-template-alist '(("a" . "export ascii")
+                                     ("c" . "center")
+                                     ("C" . "comment")
+                                     ("e" . "example")
+                                     ("E" . "export")
+                                     ("h" . "export html")
+                                     ("l" . "export latex")
+                                     ("q" . "quote")
+                                     ("s" . "src")
+                                     ("cl". "src clojure")
+                                     ("cr". "src clojure :results replace")
+                                     ("v" . "verse")))
+
 ;; (setq org-gcal-client-id "102412122628-egcfksdub9jcui6q8mug49e6mdktfsqq.apps.googleusercontent.com"
 ;;       org-gcal-client-secret (cadr (auth-source-user-and-password "org.gcal"))
 ;;       org-gcal-file-alist '(("matt.ford@mastodonc.com" . "~/org/mc-gcal.org")))
@@ -377,7 +390,7 @@
 (setq twittering-use-icon-storage t)
 
 ;; Slack
-(slack-start)
+;; (slack-start)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
