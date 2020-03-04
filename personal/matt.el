@@ -31,6 +31,7 @@
                             fold-dwim-org
                             org2blog
                             org-gcal
+                            org-download
                             all-the-icons
                             all-the-icons-dired
                             doom-themes
@@ -377,7 +378,7 @@
 (setq twittering-use-icon-storage t)
 
 ;; Slack
-(slack-start)
+;;(slack-start)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
