@@ -63,7 +63,7 @@
     (add-hook 'before-save-hook 'gofmt-before-save nil t)
 
     ;; stop whitespace being highlighted
-    (whitespace-toggle-options '(tabs))
+    ;; (whitespace-toggle-options '(tabs))
 
     ;; Company mode settings
     (set (make-local-variable 'company-backends) '(company-go))
