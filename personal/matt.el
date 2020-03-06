@@ -31,6 +31,7 @@
                             fold-dwim-org
                             org2blog
                             org-gcal
+                            org-download
                             all-the-icons
                             all-the-icons-dired
                             doom-themes
