@@ -62,6 +62,7 @@
                             slack
                             org-download
                             org-drill
+                            epresent
                             ))
 
 (setq alert-default-style 'libnotify)
@@ -109,21 +110,21 @@
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
 
-(global-set-key (kbd "C-c C-s u") 'slack-all-unreads)
-(global-set-key (kbd "C-c C-s c") 'slack-channel-select)
-(global-set-key (kbd "C-c C-s s") 'slack-search-from-messages)
-(global-set-key (kbd "C-c C-s r") 'slack-message-add-reaction)
-(global-set-key (kbd "C-c C-s R") 'slack-message-remove-reaction)
-(global-set-key (kbd "C-c C-s p") 'slack-message-pins-add)
-(global-set-key (kbd "C-c C-s P") 'slack-message-pins-remove)
-(global-set-key (kbd "C-C C-s C-p") 'slack-room-pins-list)
-(global-set-key (kbd "C-c C-s e") 'slack-message-embed-mention)
-(global-set-key (kbd "C-c C-s E") 'slack-message-embed-channel)
-(global-set-key (kbd "C-c C-s I") 'slack-user-select)
-(global-set-key (kbd "C-c C-s i") 'slack-im-select)
-(global-set-key (kbd "C-c C-s g") 'slack-group-select)
-(global-set-key (kbd "C-c C-s b") 'slack-message-write-another-buffer)
-(global-set-key (kbd "C-c C-s f") 'slack-file-upload)
+;; (global-set-key (kbd "C-c C-s u") 'slack-all-unreads)
+;; (global-set-key (kbd "C-c C-s c") 'slack-channel-select)
+;; (global-set-key (kbd "C-c C-s s") 'slack-search-from-messages)
+;; (global-set-key (kbd "C-c C-s r") 'slack-message-add-reaction)
+;; (global-set-key (kbd "C-c C-s R") 'slack-message-remove-reaction)
+;; (global-set-key (kbd "C-c C-s p") 'slack-message-pins-add)
+;; (global-set-key (kbd "C-c C-s P") 'slack-message-pins-remove)
+;; (global-set-key (kbd "C-C C-s C-p") 'slack-room-pins-list)
+;; (global-set-key (kbd "C-c C-s e") 'slack-message-embed-mention)
+;; (global-set-key (kbd "C-c C-s E") 'slack-message-embed-channel)
+;; (global-set-key (kbd "C-c C-s I") 'slack-user-select)
+;; (global-set-key (kbd "C-c C-s i") 'slack-im-select)
+;; (global-set-key (kbd "C-c C-s g") 'slack-group-select)
+;; (global-set-key (kbd "C-c C-s b") 'slack-message-write-another-buffer)
+;; (global-set-key (kbd "C-c C-s f") 'slack-file-upload)
 
 ;(when (not (eq system-type 'gnu/linux))
 ;  (setq epg-pinentry-mode 'loopback)
@@ -141,22 +142,22 @@
 
 ;; Slack
 
-(setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
-(setq slack-prefer-current-team t)
+;; (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
+;; (setq slack-prefer-current-team t)
 
-(slack-register-team
- :name "cloudsolutionshq"
- :default nil
- :token (cadr (auth-source-user-and-password "cloudsolutionshq"))
- :subscribed-channels '()
- :full-and-display-names t)
+;; (slack-register-team
+;;  :name "cloudsolutionshq"
+;;  :default nil
+;;  :token (cadr (auth-source-user-and-password "cloudsolutionshq"))
+;;  :subscribed-channels '()
+;;  :full-and-display-names t)
 
-(slack-register-team
- :name "clojurians"
- :default t
- :token (cadr (auth-source-user-and-password "clojurians"))
- :subscribed-channels '()
- :full-and-display-names t)
+;; (slack-register-team
+;;  :name "clojurians"
+;;  :default t
+;;  :token (cadr (auth-source-user-and-password "clojurians"))
+;;  :subscribed-channels '()
+;;  :full-and-display-names t)
 
 
 ;; Git
@@ -213,7 +214,8 @@
  'org-babel-load-languages
  '((emacs-lisp . t)
    (shell . t)
-   (clojure . t)))
+   (clojure . t)
+   (sql . t)))
 
 (setq org-babel-clojure-backend 'cider)
 (setq org-export-babel-evaluate nil)
