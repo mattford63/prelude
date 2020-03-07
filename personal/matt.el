@@ -32,6 +32,7 @@
                             org2blog
                             org-gcal
                             org-download
+                            org-brain
                             all-the-icons
                             all-the-icons-dired
                             doom-themes
