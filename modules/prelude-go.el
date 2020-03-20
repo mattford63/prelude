@@ -30,6 +30,7 @@
 ;;; Code:
 
 (require 'prelude-programming)
+(require 'prelude-lsp)
 
 (prelude-require-packages '(go-mode
                             company-go
@@ -60,13 +61,24 @@
         (setq gofmt-command goimports)))
 
     ;; gofmt on save
-    (add-hook 'before-save-hook 'gofmt-before-save nil t)
+    ;;(add-hook 'before-save-hook 'gofmt-before-save nil t)
+
+    ;; lsp on save
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t)
 
     ;; stop whitespace being highlighted
     ;; (whitespace-toggle-options '(tabs))
 
     ;; Company mode settings
-    (set (make-local-variable 'company-backends) '(company-go))
+    (set (make-local-variable 'company-backends) '(company-lsp))
+
+    ;; Yas minor mode
+    (yas-minor-mode)
+
+    ;; LSP
+    (lsp)
+    (lsp-ui-mode)
 
     ;; El-doc for Go
     (go-eldoc-setup)
