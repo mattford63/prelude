@@ -10,6 +10,9 @@
         (set-keymap-parent map (keymap-parent input-decode-map))
         (set-keymap-parent input-decode-map map))))
 
+(setenv "PATH" (concat (getenv "PATH") ":/Users/matt/bin"))
+(setq exec-path (append exec-path '("/Users/matt/bin")))
+
 ;; Packages
 (prelude-require-packages '(visual-fill-column
                             clj-refactor
@@ -53,7 +56,7 @@
                             avy
                             ess
                             symbol-overlay
-                            flycheck-joker
+                            flycheck-clj-kondo
                             elfeed
                             elfeed-org
                             conda
@@ -65,6 +68,10 @@
                             org-download
                             org-drill
                             epresent
+                            vterm
+                            vterm-toogle
+                            python-pytest
+                            pipenv
                             ))
 
 (setq alert-default-style 'libnotify)
@@ -111,6 +118,8 @@
 
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
+
+(define-key python-mode-map (kbd "C-c C-t C-t") 'python-pytest-dispatch)
 
 ;; (global-set-key (kbd "C-c C-s u") 'slack-all-unreads)
 ;; (global-set-key (kbd "C-c C-s c") 'slack-channel-select)
@@ -171,6 +180,7 @@
 (setq markdown-preview-stylesheets (list "http://thomasf.github.io/solarized-css/solarized-light.min.css"))
 (add-to-list 'markdown-preview-stylesheets "https://raw.githubusercontent.com/richleland/pygments-css/master/emacs.css")
 (define-key markdown-mode-command-map (kbd "g") #'grip-mode)
+(setq markdown-command "pandoc")
 
 ;; Conda
 ;; (setq conda-anaconda-home "~/miniconda3")
@@ -178,7 +188,9 @@
 
 ;; Clojure
 (setq cljr-warn-on-eval t)
-(require 'flycheck-joker)
+;;(require 'flycheck-joker)
+(require 'flycheck-clj-kondo)
+
 (add-hook 'clojure-mode-hook 'hs-minor-mode)
 (add-hook 'clojure-mode-hook 'fold-dwim-org/minor-mode)
 
