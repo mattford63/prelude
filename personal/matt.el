@@ -69,7 +69,7 @@
                             org-drill
                             epresent
                             vterm
-                            vterm-toogle
+                            vterm-toggle
                             python-pytest
                             pipenv
                             ))
