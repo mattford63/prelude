@@ -119,7 +119,6 @@
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-#") 'avy-goto-line)
 
-(define-key python-mode-map (kbd "C-c C-t C-t") 'python-pytest-dispatch)
 
 ;; (global-set-key (kbd "C-c C-s u") 'slack-all-unreads)
 ;; (global-set-key (kbd "C-c C-s c") 'slack-channel-select)
@@ -200,6 +199,8 @@
       python-shell-interpreter-args "--simple-prompt -i")
 (add-hook 'python-mode-hook 'hs-minor-mode)
 (add-hook 'python-mode-hook 'fold-dwim-org/minor-mode)
+(add-hook 'python-mode-hook '(local-set-key (kbd "C-c C-t C-t")
+                                            'python-pytest-dispatch))
 ;;(pyvenv-tracking-mode 1)
 
 ;; Other Languages
